@@ -1,0 +1,128 @@
+import React, { useState, useEffect } from 'react';
+import { FaGithub, FaLinkedin, FaInstagram, FaEnvelope } from 'react-icons/fa';
+import profileImg from '../assets/profile.png';
+
+// Custom typing effect component
+function Typewriter({ words, typingSpeed = 100, deletingSpeed = 50, delayBetween = 2000 }) {
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [currentText, setCurrentText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    let timer;
+    const activeWord = words[currentWordIndex];
+
+    if (isDeleting) {
+      // Removing characters
+      timer = setTimeout(() => {
+        setCurrentText(activeWord.substring(0, currentText.length - 1));
+      }, deletingSpeed);
+    } else {
+      // Adding characters
+      timer = setTimeout(() => {
+        setCurrentText(activeWord.substring(0, currentText.length + 1));
+      }, typingSpeed);
+    }
+
+    // Checking states
+    if (!isDeleting && currentText === activeWord) {
+      timer = setTimeout(() => setIsDeleting(true), delayBetween);
+    } else if (isDeleting && currentText === '') {
+      setIsDeleting(false);
+      setCurrentWordIndex((prev) => (prev + 1) % words.length);
+    }
+
+    return () => clearTimeout(timer);
+  }, [currentText, isDeleting, currentWordIndex, words, typingSpeed, deletingSpeed, delayBetween]);
+
+  return (
+    <span className="text-purple-500 font-semibold border-r-2 border-purple-500 pr-1 animate-pulse">
+      {currentText}
+    </span>
+  );
+}
+
+export default function Hero() {
+  const words = ['B.Tech Student', 'Front-End Developer', 'Programmer'];
+
+  return (
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+      {/* Dynamic Ambient Background Blobs */}
+      <div className="absolute top-20 left-10 w-72 h-72 rounded-full bg-purple-500/10 dark:bg-purple-500/15 blob animate-spin-slow" />
+      <div className="absolute bottom-20 right-10 w-96 h-96 rounded-full bg-indigo-500/10 dark:bg-indigo-500/15 blob animate-pulse-slow" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10 grid grid-cols-1 md:grid-cols-12 gap-8 items-center py-12">
+        {/* Left Text details */}
+        <div className="md:col-span-7 flex flex-col justify-center text-center md:text-left space-y-6 order-2 md:order-1" data-aos="fade-right">
+          <span className="text-sm font-semibold tracking-wider uppercase text-purple-600 dark:text-purple-400">
+            Welcome to my digital space
+          </span>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white leading-tight tracking-tight">
+            Hi, I'm <span className="bg-gradient-to-r from-purple-500 via-indigo-500 to-pink-500 bg-clip-text text-transparent">Harsh Tiwari</span>
+          </h1>
+          
+          <h2 className="text-xl sm:text-2xl font-medium text-slate-700 dark:text-slate-300">
+            I am a <Typewriter words={words} />
+          </h2>
+
+          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400 max-w-xl">
+            "Building Innovative Digital Solutions Through Code and Creativity."
+            <br />
+            <span className="text-sm mt-2 block text-slate-500 dark:text-slate-500">
+              I am a passionate B.Tech student with a strong interest in web development, programming, and technology. I enjoy creating responsive websites and solving real-world problems through innovative software solutions.
+            </span>
+          </p>
+
+          {/* Action buttons */}
+          <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 pt-4">
+            <a href="#contact" className="btn-primary w-full sm:w-auto text-center">
+              Hire Me
+            </a>
+            <a 
+              href="/resume.jpg" 
+              download="Harsh_Tiwari_Resume.jpg"
+              className="btn-secondary w-full sm:w-auto text-center animate-pulse-slow"
+            >
+              Download Resume
+            </a>
+          </div>
+
+          <div className="flex items-center justify-center md:justify-start space-x-6 pt-6">
+            <a href="https://www.linkedin.com/in/harsh-tiwari-127192329?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-slate-100 hover:bg-purple-500 dark:bg-navy-800 dark:hover:bg-purple-500 text-slate-700 dark:text-slate-300 hover:text-white dark:hover:text-white transition-all duration-300 transform hover:-translate-y-1" aria-label="LinkedIn">
+              <FaLinkedin className="w-5 h-5" />
+            </a>
+            <a href="https://www.instagram.com/iharrxh?igsh=MTF4aWd2dmVwcDFubA==" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-slate-100 hover:bg-purple-500 dark:bg-navy-800 dark:hover:bg-purple-500 text-slate-700 dark:text-slate-300 hover:text-white dark:hover:text-white transition-all duration-300 transform hover:-translate-y-1" aria-label="Instagram">
+              <FaInstagram className="w-5 h-5" />
+            </a>
+            <a href="mailto:mt63767199@gmail.com" className="p-3 rounded-full bg-slate-100 hover:bg-purple-500 dark:bg-navy-800 dark:hover:bg-purple-500 text-slate-700 dark:text-slate-300 hover:text-white dark:hover:text-white transition-all duration-300 transform hover:-translate-y-1" aria-label="Email">
+              <FaEnvelope className="w-5 h-5" />
+            </a>
+          </div>
+        </div>
+
+        {/* Right profile image */}
+        <div className="md:col-span-5 flex justify-center order-1 md:order-2" data-aos="fade-left">
+          <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96">
+            {/* Glowing borders and rings */}
+            <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-purple-500 to-indigo-600 animate-spin-slow opacity-30 blur-md scale-105" />
+            <div className="absolute inset-2 rounded-full border-2 border-dashed border-purple-500/40 animate-spin-slow" />
+            <div className="absolute inset-4 rounded-full bg-navy-950 overflow-hidden shadow-2xl border-4 border-white/10 dark:border-white/5 group">
+              <img 
+                src={profileImg} 
+                alt="Harsh Tiwari" 
+                className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500 ease-out" 
+              />
+            </div>
+            {/* Floating micro badges */}
+            <div className="absolute top-8 right-0 p-3 rounded-2xl glass-card text-center animate-float shadow-lg">
+              <span className="text-2xl">💻</span>
+            </div>
+            <div className="absolute bottom-8 left-0 p-3 rounded-2xl glass-card text-center animate-float shadow-lg" style={{ animationDelay: '1.5s' }}>
+              <span className="text-2xl">🚀</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
