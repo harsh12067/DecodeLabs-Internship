@@ -58,7 +58,8 @@ The application goes beyond a static portfolio by adding an **AI-powered assista
 | Styling | Tailwind CSS v4 |
 | Animations | Framer Motion, AOS |
 | Icons | react-icons |
-| AI API | Anthropic Claude (claude-haiku-4-5) |
+| AI API | Google Gemini API (gemini-2.0-flash) |
+| AI SDK | @google/genai (official Google GenAI JS SDK) |
 | Backend | Netlify Functions (serverless) |
 | Testing | Vitest, React Testing Library, jsdom |
 | Deployment | Netlify |
@@ -86,7 +87,7 @@ cp .env.example .env
 
 Edit `.env`:
 ```
-ANTHROPIC_API_KEY=your_anthropic_api_key_here
+GEMINI_API_KEY=your_gemini_api_key_here
 ```
 
 > ⚠️ Never commit `.env` to version control. It is listed in `.gitignore`.
@@ -97,7 +98,7 @@ npm run dev
 ```
 Open [http://localhost:5173](http://localhost:5173)
 
-> **Note**: The AI feature requires `ANTHROPIC_API_KEY` set in Netlify environment variables to work in production. Locally, it requires the [Netlify CLI](https://docs.netlify.com/cli/get-started/) to test serverless functions.
+> **Note**: The AI feature requires `GEMINI_API_KEY` set in Netlify environment variables to work in production. Locally, it requires the [Netlify CLI](https://docs.netlify.com/cli/get-started/) to test serverless functions.
 
 ---
 
@@ -130,9 +131,15 @@ AskPortfolio Component — Renders result
 ### Why AI?
 Recruiters and visitors often don't read every section of a portfolio. The AI assistant helps them **quickly find what they need** — "Which projects use React?" or "What is Harsh's internship experience?" — saving time and improving discovery.
 
+### Gemini Model Used
+- **Model**: `gemini-2.0-flash`
+- **SDK**: `@google/genai` (official Google GenAI JavaScript SDK)
+- **Temperature**: `0.2` — low temperature for factual, grounded answers
+- **Max Output Tokens**: `600`
+
 ### How Hallucinations Are Prevented
 - A centralized `src/data/portfolioData.js` file contains **all real portfolio content**
-- This data is injected into the AI's system prompt at every request
+- This data is injected into the AI's `systemInstruction` at every request
 - The system prompt explicitly instructs: **"Use ONLY the portfolio information supplied. Never invent or assume information."**
 - If the AI cannot answer, it returns: `"I don't have enough information about that in this portfolio."`
 

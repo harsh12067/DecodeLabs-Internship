@@ -1,22 +1,21 @@
 /**
  * Netlify Serverless Function: ask-portfolio
  *
- * Secure proxy between the portfolio UI and the Anthropic API.
+ * Secure proxy between the portfolio UI and the Google Gemini API.
  * The API key NEVER appears in frontend code — only in Netlify env vars.
  *
  * Architecture:
- *   Portfolio UI → POST /api/ask-portfolio → This function → Anthropic API
+ *   Portfolio UI → POST /api/ask-portfolio → This function → Gemini API
  *                                          ← Structured JSON ←
+ *
+ * SDK:     @google/genai (official Google GenAI JavaScript SDK)
+ * Model:   gemini-2.0-flash (fast, cost-effective, strong instruction-following)
  */
 
-import Anthropic from '@anthropic-ai/sdk';
+import { GoogleGenAI } from '@google/genai';
 import { portfolioData } from '../../src/data/portfolioData.js';
 
-const client = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
-});
-
-/** Build the AI system prompt using real portfolio data only */
+/** Build the grounding prompt using real portfolio data only */
 function buildSystemPrompt(data) {
   const projectList = data.projects
     .map(
@@ -96,7 +95,7 @@ Only include projects that are GENUINELY relevant to the question.`;
 /** Validate and parse the AI response */
 function parseAIResponse(rawText) {
   try {
-    // Extract JSON from the response (Claude may add markdown code fences)
+    // Extract JSON — Gemini may wrap it in markdown code fences
     const jsonMatch = rawText.match(/\{[\s\S]*\}/);
     if (!jsonMatch) throw new Error('No JSON object found in response');
 
@@ -106,7 +105,7 @@ function parseAIResponse(rawText) {
     if (typeof parsed.answer !== 'string') throw new Error('Missing answer field');
     if (!Array.isArray(parsed.relatedProjects)) throw new Error('Missing relatedProjects array');
 
-    // Validate relatedProjects shape
+    // Validate and clean relatedProjects
     const cleanProjects = parsed.relatedProjects
       .filter((p) => p && typeof p.name === 'string' && typeof p.reason === 'string')
       .slice(0, 3); // Max 3 related projects
@@ -157,8 +156,8 @@ export const handler = async (event) => {
   }
 
   // Check API key
-  if (!process.env.ANTHROPIC_API_KEY) {
-    console.error('ANTHROPIC_API_KEY is not configured');
+  if (!process.env.GEMINI_API_KEY) {
+    console.error('GEMINI_API_KEY is not configured');
     return {
       statusCode: 500,
       body: JSON.stringify({ error: 'AI service is not configured' }),
@@ -166,20 +165,24 @@ export const handler = async (event) => {
   }
 
   try {
+    const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
     const systemPrompt = buildSystemPrompt(portfolioData);
 
-    const message = await client.messages.create({
-      model: 'claude-haiku-4-5',
-      max_tokens: 600,
-      system: systemPrompt,
-      messages: [{ role: 'user', content: question }],
+    const response = await ai.models.generateContent({
+      model: 'gemini-2.0-flash',
+      contents: question,
+      config: {
+        systemInstruction: systemPrompt,
+        maxOutputTokens: 600,
+        temperature: 0.2, // Low temperature for factual, grounded answers
+      },
     });
 
-    const rawText = message.content[0]?.text || '';
+    const rawText = response.text ?? '';
     const parsed = parseAIResponse(rawText);
 
     if (!parsed) {
-      // Malformed response from AI
+      // Malformed or unexpected response — safe fallback
       return {
         statusCode: 200,
         headers: { 'Content-Type': 'application/json' },
@@ -197,7 +200,7 @@ export const handler = async (event) => {
       body: JSON.stringify(parsed),
     };
   } catch (error) {
-    console.error('Anthropic API error:', error);
+    console.error('Gemini API error:', error);
 
     // Timeout detection
     if (error.message?.includes('timeout') || error.code === 'ETIMEDOUT') {

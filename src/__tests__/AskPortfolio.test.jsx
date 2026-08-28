@@ -3,6 +3,8 @@ import { render, screen, fireEvent, waitFor, act } from '@testing-library/react'
 import userEvent from '@testing-library/user-event';
 import AskPortfolio from '../components/AskPortfolio';
 
+// Note: fetch is mocked below to simulate Gemini API responses via the Netlify Function proxy.
+
 // Helper to render and get the trigger button
 function setup() {
   render(<AskPortfolio />);

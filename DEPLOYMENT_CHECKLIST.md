@@ -12,7 +12,7 @@ Use this checklist before every production deployment.
 - [ ] No secrets committed to Git (check with `git log --all -p | grep -i "api_key"`)
 - [ ] `.env` is listed in `.gitignore` and NOT committed
 - [ ] `.env.example` is committed (contains only placeholder values)
-- [ ] `ANTHROPIC_API_KEY` is set in Netlify Environment Variables dashboard
+- [ ] `GEMINI_API_KEY` is set in Netlify Environment Variables dashboard
 
 ## AI Feature
 - [ ] AI assistant button visible and clickable on desktop
