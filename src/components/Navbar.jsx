@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { FiMenu, FiX, FiSun, FiMoon } from 'react-icons/fi';
+import React, { useState, useEffect, useRef } from 'react';
+import { FiMenu, FiX } from 'react-icons/fi';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const menuBtnRef = useRef(null);
+  const drawerRef = useRef(null);
 
   const navLinks = [
     { name: 'Home', href: '#home' },
     { name: 'About', href: '#about' },
     { name: 'Skills', href: '#skills' },
+    { name: 'Projects', href: '#projects' },
     { name: 'Experience', href: '#experience' },
     { name: 'Education', href: '#education' },
     { name: 'Certifications', href: '#certifications' },
@@ -17,86 +20,124 @@ export default function Navbar() {
   ];
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
-    window.addEventListener('scroll', handleScroll);
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Escape key closes mobile drawer
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && isOpen) {
+        setIsOpen(false);
+        menuBtnRef.current?.focus();
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen]);
+
+  // Prevent body scroll when drawer is open
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [isOpen]);
+
+  const handleClose = () => {
+    setIsOpen(false);
+    menuBtnRef.current?.focus();
+  };
+
   return (
-    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'glass-nav py-3 shadow-md' : 'bg-transparent py-5'}`}>
+    <nav
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'glass-nav py-3 shadow-md' : 'bg-transparent py-5'}`}
+      aria-label="Main navigation"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-12">
           {/* Logo */}
-          <a href="#home" className="flex items-center group">
-            <span className="text-2xl font-bold bg-gradient-to-r from-purple-500 to-indigo-600 bg-clip-text text-transparent group-hover:opacity-80 transition-opacity">
+          <a href="#home" className="flex items-center group" aria-label="Harsh Tiwari — Back to top">
+            <span className="text-2xl font-bold bg-gradient-to-r from-purple-500 to-indigo-600 bg-clip-text text-transparent group-hover:opacity-80 transition-opacity" aria-hidden="true">
               HT.
             </span>
           </a>
 
           {/* Desktop Nav Links */}
-          <div className="hidden md:flex items-center space-x-6">
+          <ul className="hidden md:flex items-center space-x-6 list-none m-0 p-0" role="list">
             {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-purple-500 dark:hover:text-purple-500 transition-colors duration-200"
-              >
-                {link.name}
-              </a>
+              <li key={link.name}>
+                <a
+                  href={link.href}
+                  className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-purple-500 dark:hover:text-purple-500 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 rounded-sm"
+                >
+                  {link.name}
+                </a>
+              </li>
             ))}
-          </div>
+          </ul>
 
-          {/* Mobile Menu & Theme Toggle */}
-          <div className="md:hidden flex items-center space-x-4">
-            {/* Menu Toggle */}
+          {/* Mobile Menu Toggle */}
+          <div className="md:hidden flex items-center">
             <button
+              ref={menuBtnRef}
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-md text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-navy-800 transition-colors"
-              aria-label="Open Menu"
+              className="p-2 rounded-md text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-navy-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"
+              aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
+              aria-expanded={isOpen}
+              aria-controls="mobile-menu"
             >
-              {isOpen ? <FiX className="w-6 h-6" /> : <FiMenu className="w-6 h-6" />}
+              {isOpen ? <FiX className="w-6 h-6" aria-hidden="true" /> : <FiMenu className="w-6 h-6" aria-hidden="true" />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Drawer menu */}
-      <div className={`md:hidden fixed top-0 right-0 h-screen w-64 bg-white dark:bg-navy-950 shadow-2xl transition-transform duration-300 ease-in-out transform ${isOpen ? 'translate-x-0' : 'translate-x-full'} z-40`}>
+      {/* Mobile Drawer */}
+      <div
+        id="mobile-menu"
+        ref={drawerRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Navigation menu"
+        className={`md:hidden fixed top-0 right-0 h-screen w-64 bg-white dark:bg-navy-950 shadow-2xl transition-transform duration-300 ease-in-out transform ${isOpen ? 'translate-x-0' : 'translate-x-full'} z-40`}
+      >
         <div className="flex flex-col h-full pt-20 pb-6 px-6">
-          <button 
-            onClick={() => setIsOpen(false)}
-            className="absolute top-5 right-5 p-2 rounded-md text-slate-700 dark:text-slate-300"
+          <button
+            onClick={handleClose}
+            className="absolute top-5 right-5 p-2 rounded-md text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-navy-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"
+            aria-label="Close navigation menu"
           >
-            <FiX className="w-6 h-6" />
+            <FiX className="w-6 h-6" aria-hidden="true" />
           </button>
-          <div className="flex flex-col space-y-4">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className="text-lg font-medium text-slate-800 dark:text-slate-200 hover:text-purple-500 dark:hover:text-purple-500 py-2 border-b border-slate-100 dark:border-slate-800"
-              >
-                {link.name}
-              </a>
-            ))}
-          </div>
-          <div className="mt-auto text-center text-xs text-slate-400">
+
+          <nav aria-label="Mobile navigation">
+            <ul className="flex flex-col space-y-1 list-none m-0 p-0" role="list">
+              {navLinks.map((link) => (
+                <li key={link.name}>
+                  <a
+                    href={link.href}
+                    onClick={handleClose}
+                    className="block text-lg font-medium text-slate-800 dark:text-slate-200 hover:text-purple-500 dark:hover:text-purple-500 py-2 border-b border-slate-100 dark:border-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 rounded-sm"
+                  >
+                    {link.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <div className="mt-auto text-center text-xs text-slate-400" aria-hidden="true">
             © {new Date().getFullYear()} Harsh Tiwari
           </div>
         </div>
       </div>
-      {/* Overlay background for drawer */}
+
+      {/* Overlay */}
       {isOpen && (
-        <div 
-          onClick={() => setIsOpen(false)}
+        <div
+          onClick={handleClose}
           className="md:hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-30"
+          aria-hidden="true"
         />
       )}
     </nav>
