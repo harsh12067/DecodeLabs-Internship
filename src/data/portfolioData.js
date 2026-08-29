@@ -134,7 +134,7 @@ export const portfolioData = {
         'A modern, professional, and fully responsive SaaS landing page for engineering and product teams built completely from scratch using semantic HTML5, pure CSS3 with glassmorphism, and Vanilla JavaScript.',
       technologies: ['HTML5', 'CSS3', 'JavaScript', 'Glassmorphism', 'Flexbox & Grid'],
       category: ['frontend', 'web', 'UI/UX', 'JavaScript'],
-      liveLink: 'https://lnkd.in/gi5raxjy',
+      liveLink: 'https://antherlandingpage.netlify.app/',
       githubLink: 'https://github.com/harsh12067/DecodeLabs-Internship/tree/main/aetherflow-landing-page',
       highlights: [
         '10 semantic sections with responsive layout (Mobile to Desktop)',
