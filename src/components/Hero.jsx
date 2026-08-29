@@ -110,7 +110,7 @@ export default function Hero() {
               <img 
                 src={profileImg} 
                 alt="Harsh Tiwari" 
-                className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500 ease-out" 
+                className="w-full h-full object-cover object-top transform hover:scale-110 transition-transform duration-500 ease-out" 
               />
             </div>
             {/* Floating micro badges */}
