@@ -8,9 +8,11 @@
  *   Portfolio UI → POST /api/ask-portfolio → This function → Gemini API
  *                                          ← Structured JSON ←
  *
- * Provider: Google Gemini API (gemini-1.5-flash / gemini-2.0-flash / gemini-1.5-pro)
+ * SDK:     @google/genai (official Google GenAI JavaScript SDK)
+ * Model:   gemini-2.5-flash
  */
 
+import { GoogleGenAI } from '@google/genai';
 import { portfolioData } from '../../src/data/portfolioData.js';
 
 /** Build the grounding prompt using real portfolio data only */
@@ -117,55 +119,6 @@ function parseAIResponse(rawText) {
   }
 }
 
-/** Call Google Gemini REST API directly with resilient model fallback */
-async function generateGeminiContent(apiKey, systemPrompt, question) {
-  const cleanKey = apiKey.trim().replace(/^["']|["']$/g, '');
-  const candidateModels = ['gemini-1.5-flash', 'gemini-2.0-flash', 'gemini-1.5-pro'];
-  let lastError = null;
-
-  for (const model of candidateModels) {
-    try {
-      const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${cleanKey}`;
-      
-      const res = await fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          system_instruction: {
-            parts: [{ text: systemPrompt }],
-          },
-          contents: [
-            {
-              role: 'user',
-              parts: [{ text: question }],
-            },
-          ],
-          generationConfig: {
-            temperature: 0.2,
-            maxOutputTokens: 600,
-          },
-        }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.error?.message || `HTTP ${res.status}`);
-      }
-
-      const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
-      if (text) {
-        return text;
-      }
-    } catch (err) {
-      lastError = err;
-      console.warn(`Model ${model} attempt failed:`, err?.message || err);
-    }
-  }
-
-  throw lastError || new Error('No response from Gemini API');
-}
-
 export const handler = async (event) => {
   // Only allow POST
   if (event.httpMethod !== 'POST') {
@@ -203,8 +156,8 @@ export const handler = async (event) => {
   }
 
   // Check API key
-  const apiKey = process.env.GEMINI_API_KEY;
-  if (!apiKey || !apiKey.trim()) {
+  const rawKey = process.env.GEMINI_API_KEY;
+  if (!rawKey || !rawKey.trim()) {
     console.error('GEMINI_API_KEY is not configured');
     return {
       statusCode: 500,
@@ -212,10 +165,23 @@ export const handler = async (event) => {
     };
   }
 
-  try {
-    const systemPrompt = buildSystemPrompt(portfolioData);
-    const rawText = await generateGeminiContent(apiKey, systemPrompt, question);
+  const cleanKey = rawKey.trim().replace(/^["']|["']$/g, '');
 
+  try {
+    const ai = new GoogleGenAI({ apiKey: cleanKey });
+    const systemPrompt = buildSystemPrompt(portfolioData);
+
+    const response = await ai.models.generateContent({
+      model: 'gemini-2.5-flash',
+      contents: question,
+      config: {
+        systemInstruction: systemPrompt,
+        maxOutputTokens: 600,
+        temperature: 0.2, // Low temperature for factual, grounded answers
+      },
+    });
+
+    const rawText = response?.text ?? '';
     const parsed = parseAIResponse(rawText);
 
     if (!parsed) {
