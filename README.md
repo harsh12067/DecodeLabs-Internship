@@ -58,7 +58,7 @@ The application goes beyond a static portfolio by adding an **AI-powered assista
 | Styling | Tailwind CSS v4 |
 | Animations | Framer Motion, AOS |
 | Icons | react-icons |
-| AI API | Google Gemini API (gemini-2.5-flash) |
+| AI API | Google Gemini API (gemini-3.6-flash) |
 | AI SDK | @google/genai (official Google GenAI JS SDK) |
 | Backend | Netlify Functions (serverless) |
 | Testing | Vitest, React Testing Library, jsdom |
@@ -132,7 +132,7 @@ AskPortfolio Component — Renders result
 Recruiters and visitors often don't read every section of a portfolio. The AI assistant helps them **quickly find what they need** — "Which projects use React?" or "What is Harsh's internship experience?" — saving time and improving discovery.
 
 ### Gemini Model Used
-- **Model**: `gemini-2.5-flash`
+- **Model**: `gemini-3.6-flash`
 - **SDK**: `@google/genai` (official Google GenAI JavaScript SDK)
 - **Temperature**: `0.2` — low temperature for factual, grounded answers
 - **Max Output Tokens**: `600`
