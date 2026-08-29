@@ -2,7 +2,7 @@
 
 A production-ready, AI-enhanced personal portfolio built with **React + Vite + Tailwind CSS**. Submitted as the **DecodeLabs Internship Capstone Project**.
 
-🌐 **Live site**: [harshhweb.netlify.app](https://harshhweb.netlify.app/)  
+🌐 **Live site**: [portfolioowebb.netlify.app](https://portfolioowebb.netlify.app/)  
 📦 **Repository**: [github.com/harsh12067/DecodeLabs-Internship](https://github.com/harsh12067/DecodeLabs-Internship)
 
 ---

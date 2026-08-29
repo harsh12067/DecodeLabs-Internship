@@ -54,7 +54,7 @@ describe('Projects', () => {
   it('renders live demo link for portfolio project', () => {
     render(<Projects />);
     const liveLinks = screen.getAllByRole('link', { name: /view personal portfolio website live demo/i });
-    expect(liveLinks[0]).toHaveAttribute('href', 'https://harshhweb.netlify.app/');
+    expect(liveLinks[0]).toHaveAttribute('href', 'https://portfolioowebb.netlify.app/');
   });
 
   it('shows private project label for projects without GitHub links', () => {

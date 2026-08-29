@@ -20,7 +20,7 @@ export const portfolioData = {
     tagline: 'Building Innovative Digital Solutions Through Code and Creativity.',
     linkedin: 'https://www.linkedin.com/in/harsh-tiwari-127192329',
     instagram: 'https://www.instagram.com/iharrxh',
-    livePortfolio: 'https://harshhweb.netlify.app/',
+    livePortfolio: 'https://portfolioowebb.netlify.app/',
   },
 
   education: [
@@ -116,7 +116,7 @@ export const portfolioData = {
         'The personal portfolio website of Harsh Tiwari. Features a highly modern, responsive design with glassmorphic layout, fluid Framer Motion animations, AOS scroll triggers, and an AI portfolio assistant.',
       technologies: ['React.js', 'Tailwind CSS', 'Framer Motion', 'AOS', 'JavaScript'],
       category: ['frontend', 'React', 'web'],
-      liveLink: 'https://harshhweb.netlify.app/',
+      liveLink: 'https://portfolioowebb.netlify.app/',
       githubLink: 'https://github.com/harsh12067/DecodeLabs-Internship',
       highlights: [
         'Glassmorphic dark-mode design',
