@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AetherFlow | Next-Generation Team Workspace & Productivity Platform</title>
+  <meta name="description" content="AetherFlow is a premium, collaborative workspace for product, design, and development teams. Unify your workflows, automate tasks, and scale your productivity.">
+  
+  <!-- Google Fonts (Outfit & Plus Jakarta Sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  
+  <!-- Vanilla JS Script (deferred for performance) -->
+  <script src="js/script.js" defer></script>
+</head>
+<body>
+
+  <!-- 1. Responsive Navigation Bar -->
+  <header class="header" id="header">
+    <div class="container nav-container">
+      <a href="#home" class="logo" id="nav-logo">
+        <img src="assets/icons/logo.svg" alt="AetherFlow Logo" class="logo-icon">
+        <span class="logo-text">AetherFlow</span>
+      </a>
+      
+      <!-- Desktop Navigation Menu -->
+      <nav class="nav-menu" id="nav-menu">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="#home" class="nav-link active">Home</a></li>
+          <li class="nav-item"><a href="#features" class="nav-link">Features</a></li>
+          <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+          <li class="nav-item"><a href="#services" class="nav-link">Services</a></li>
+          <li class="nav-item"><a href="#portfolio" class="nav-link">Portfolio</a></li>
+          <li class="nav-item"><a href="#testimonials" class="nav-link">Reviews</a></li>
+          <li class="nav-item"><a href="#faq" class="nav-link">FAQ</a></li>
+          <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+      
+      <!-- CTA button on navbar (Desktop) -->
+      <div class="nav-cta">
+        <a href="#contact" class="btn btn-secondary nav-btn">Get Started</a>
+      </div>
+      
+      <!-- Mobile Menu Hamburger Button -->
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle Navigation Menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- 2. Hero Section -->
+    <section id="home" class="hero section-padding">
+      <div class="container hero-grid">
+        <div class="hero-content reveal">
+          <span class="badge">Version 2.0 is live!</span>
+          <h1 class="hero-title">Where Vision and <span class="gradient-text">Execution</span> Align</h1>
+          <p class="hero-description">
+            AetherFlow integrates your design components, sprint planning, and real-time developer metrics into a single, unified workspace. Elevate team performance with frictionless collaboration.
+          </p>
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-primary" id="hero-primary-cta">Start Free Trial</a>
+            <a href="#services" class="btn btn-outline" id="hero-secondary-cta">Explore Features</a>
+          </div>
+        </div>
+        <div class="hero-image-wrapper reveal delay-1">
+          <div class="glass-card image-card">
+            <img src="assets/images/hero.png" alt="AetherFlow Modern Digital Workspace Dashboard" class="hero-img" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Features Section -->
+    <section id="features" class="features section-padding bg-alt">
+      <div class="container">
+        <div class="section-header text-center reveal">
+          <span class="section-subtitle">Core Capabilities</span>
+          <h2 class="section-title">Built for High-Growth Product Teams</h2>
+          <p class="section-desc">Streamline your entire lifecycle from initial ideas to cloud deployment with enterprise-grade features.</p>
+        </div>
+        
+        <div class="features-grid">
+          <!-- Card 1: Speed -->
+          <article class="feature-card glass-card reveal">
+            <div class="feature-icon-wrapper">
+              <img src="assets/icons/speed.svg" alt="Speed Icon" class="feature-icon">
+            </div>
+            <h3 class="feature-title">Ultra-Fast Performance</h3>
+            <p class="feature-text">Engineered for sub-millisecond response times to keep your operations fluid and lag-free.</p>
+          </article>
+          
+          <!-- Card 2: Security -->
+          <article class="feature-card glass-card reveal delay-1">
+            <div class="feature-icon-wrapper">
+              <img src="assets/icons/security.svg" alt="Security Icon" class="feature-icon">
+            </div>
+            <h3 class="feature-title">End-to-End Encryption</h3>
+            <p class="feature-text">Your workflows are fortified with SOC2 compliant, enterprise-grade access keys.</p>
+          </article>
+          
+          <!-- Card 3: Analytics -->
+          <article class="feature-card glass-card reveal delay-2">
+            <div class="feature-icon-wrapper">
+              <img src="assets/icons/analytics.svg" alt="Analytics Icon" class="feature-icon">
+            </div>
+            <h3 class="feature-title">Real-Time Insights</h3>
+            <p class="feature-text">Get automated telemetry on project sprints, codebase velocity, and team delivery rates.</p>
+          </article>
+          
+          <!-- Card 4: Collab -->
+          <article class="feature-card glass-card reveal">
+            <div class="feature-icon-wrapper">
+              <img src="assets/icons/collab.svg" alt="Collaboration Icon" class="feature-icon">
+            </div>
+            <h3 class="feature-title">Instant Collaboration</h3>
+            <p class="feature-text">Edit docs, prototype layouts, and review code branches in real-time alongside your peers.</p>
+          </article>
+          
+          <!-- Card 5: Cloud -->
+          <article class="feature-card glass-card reveal delay-1">
+            <div class="feature-icon-wrapper">
+              <img src="assets/icons/cloud.svg" alt="Cloud Icon" class="feature-icon">
+            </div>
+            <h3 class="feature-title">Multi-Cloud Sync</h3>
+            <p class="feature-text">Automatically synchronize work state across multiple cloud environments without conflicts.</p>
+          </article>
+          
+          <!-- Card 6: Customizer -->
+          <article class="feature-card glass-card reveal delay-2">
+            <div class="feature-icon-wrapper">
+              <img src="assets/icons/customizer.svg" alt="Customizer Icon" class="feature-icon">
+            </div>
+            <h3 class="feature-title">Modular Customization</h3>
+            <p class="feature-text">Tailor dashboard widgets, workspace layouts, and notification routes to fit your exact style.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. About Section -->
+    <section id="about" class="about section-padding">
+      <div class="container about-grid">
+        <div class="about-image-wrapper reveal">
+          <div class="glass-card image-card">
+            <img src="assets/images/about.png" alt="AetherFlow Productivity Data Dashboard" class="about-img" loading="lazy">
+          </div>
+        </div>
+        <div class="about-content reveal delay-1">
+          <span class="section-subtitle">Our Mission</span>
+          <h2 class="section-title">Bridging the Gap Between Design & Engineering</h2>
+          <p class="about-description">
+            Founded by a collective of engineers and UI designers, AetherFlow solves the oldest problem in digital product development: context switching. By placing assets, tasks, and system pipelines into one unified panel, we empower cross-functional teams to build at lightspeed.
+          </p>
+          <div class="stats-grid">
+            <div class="stat-item">
+              <h4 class="stat-number">99.9%</h4>
+              <p class="stat-label">System Uptime</p>
+            </div>
+            <div class="stat-item">
+              <h4 class="stat-number">12M+</h4>
+              <p class="stat-label">Tasks Automated</p>
+            </div>
+            <div class="stat-item">
+              <h4 class="stat-number">40%</h4>
+              <p class="stat-label">Faster Deployment</p>
+            </div>
+            <div class="stat-item">
+              <h4 class="stat-number">150k+</h4>
+              <p class="stat-label">Active Creators</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Services Section -->
+    <section id="services" class="services section-padding bg-alt">
+      <div class="container">
+        <div class="section-header text-center reveal">
+          <span class="section-subtitle">What We Deliver</span>
+          <h2 class="section-title">Accelerate Every Stage of Development</h2>
+          <p class="section-desc">Our specialized tooling aligns teams and automates manual configurations so you can ship features faster.</p>
+        </div>
+        
+        <div class="services-grid">
+          <!-- Service Card 1 -->
+          <article class="service-card glass-card reveal">
+            <div class="service-icon-container">
+              <img src="assets/icons/customizer.svg" alt="Design Service" class="service-icon">
+            </div>
+            <h3 class="service-title">Frictionless Design Handoff</h3>
+            <p class="service-text">Export assets instantly as CSS variables or React/HTML blocks. Keep design tokens in sync automatically across mockups and production codebases.</p>
+            <button class="btn-text open-modal-btn" data-target="modal-design">
+              Read More 
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+          </article>
+
+          <!-- Service Card 2 -->
+          <article class="service-card glass-card reveal delay-1">
+            <div class="service-icon-container">
+              <img src="assets/icons/speed.svg" alt="Development Service" class="service-icon">
+            </div>
+            <h3 class="service-title">CI/CD Pipeline Automation</h3>
+            <p class="service-text">Trigger testing suites and deployment environments right from your task card. Maintain complete status visibility without looking at terminal windows.</p>
+            <button class="btn-text open-modal-btn" data-target="modal-dev">
+              Read More 
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+          </article>
+
+          <!-- Service Card 3 -->
+          <article class="service-card glass-card reveal delay-2">
+            <div class="service-icon-container">
+              <img src="assets/icons/analytics.svg" alt="Analytics Service" class="service-icon">
+            </div>
+            <h3 class="service-title">Automated Sprint Reports</h3>
+            <p class="service-text">AetherFlow analyzes commits and tasks to generate clean AI summaries of team velocity, potential bottlenecks, and overall sprint progress.</p>
+            <button class="btn-text open-modal-btn" data-target="modal-reports">
+              Read More 
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services & Portfolio Modals (Popups) -->
+    <div class="modal-overlay" id="modal-overlay">
+      <!-- Modal Design -->
+      <div class="modal-card glass-card" id="modal-design">
+        <button class="close-modal" aria-label="Close Modal">&times;</button>
+        <h3 class="modal-title">Frictionless Design Handoff</h3>
+        <p class="modal-body">
+          AetherFlow's Design Handoff workspace features deep plugins that parse Figma and Sketch frames in real time. Rather than manual asset extraction, style sheets and variables are generated and synchronized with your GitHub repository automatically.
+        </p>
+        <p class="modal-body">
+          This system completely removes the margin for developer markup errors and keeps margins, paddings, color schemes, and fonts consistent with exact specifications.
+        </p>
+      </div>
+
+      <!-- Modal Dev -->
+      <div class="modal-card glass-card" id="modal-dev">
+        <button class="close-modal" aria-label="Close Modal">&times;</button>
+        <h3 class="modal-title">CI/CD Pipeline Automation</h3>
+        <p class="modal-body">
+          Integrate with GitHub Actions, Vercel, Netlify, or AWS. Our custom pipeline visualizer allows team members to deploy builds, monitor container status, and debug failing build logs directly from their sprint workspace cards.
+        </p>
+        <p class="modal-body">
+          You don't need configuration files or multiple browser tabs open. Get visual progress bars and terminal logs with one click.
+        </p>
+      </div>
+
+      <!-- Modal Reports -->
+      <div class="modal-card glass-card" id="modal-reports">
+        <button class="close-modal" aria-label="Close Modal">&times;</button>
+        <h3 class="modal-title">Automated Sprint Reports</h3>
+        <p class="modal-body">
+          AetherFlow utilizes standard statistical analysis models to compile codebase velocity data. Discover which features are consuming the most resources, identify PR review bottlenecks, and optimize future story estimations.
+        </p>
+        <p class="modal-body">
+          Reports are auto-generated at the end of each sprint cycle and can be shared with external stakeholders via interactive web links.
+        </p>
+      </div>
+
+      <!-- Modal Portfolio SaaS -->
+      <div class="modal-card glass-card" id="modal-portfolio-saas">
+        <button class="close-modal" aria-label="Close Modal">&times;</button>
+        <h3 class="modal-title">AetherFlow SaaS Workspace</h3>
+        <p class="modal-body">
+          Our core SaaS productivity platform delivers a unified dashboard incorporating sprint trackers, task boards, and design resources. 
+        </p>
+        <p class="modal-body">
+          <strong>Key Technologies:</strong> HTML5, CSS3 Grid/Flexbox, Vanilla JS, Node.js, WebSockets, PostgreSQL. Runs in multi-tenant secure isolation.
+        </p>
+      </div>
+
+      <!-- Modal Portfolio Fintech -->
+      <div class="modal-card glass-card" id="modal-portfolio-fintech">
+        <button class="close-modal" aria-label="Close Modal">&times;</button>
+        <h3 class="modal-title">Real-Time Fintech Dashboard</h3>
+        <p class="modal-body">
+          A custom banking dashboard that tracks ledger accounts, transaction volume, and invoice processing status. Fully integrated with secure financial telemetry.
+        </p>
+        <p class="modal-body">
+          <strong>Key Technologies:</strong> Chart.js visualization, Plaid integration, secure REST endpoints, PCI-DSS compliance audits.
+        </p>
+      </div>
+
+      <!-- Modal Portfolio Ecommerce -->
+      <div class="modal-card glass-card" id="modal-portfolio-ecommerce">
+        <button class="close-modal" aria-label="Close Modal">&times;</button>
+        <h3 class="modal-title">E-Commerce Mobile Handoff</h3>
+        <p class="modal-body">
+          Mobile application mockup showcasing pixel-perfect UI design systems. Translates Figma spacing tokens directly into responsive layout matrices.
+        </p>
+        <p class="modal-body">
+          <strong>Key Technologies:</strong> React Native layouts, responsive grids, localized assets, auto-generated styles.
+        </p>
+      </div>
+
+      <!-- Modal Portfolio Developer -->
+      <div class="modal-card glass-card" id="modal-portfolio-developer">
+        <button class="close-modal" aria-label="Close Modal">&times;</button>
+        <h3 class="modal-title">CI/CD Developer Console</h3>
+        <p class="modal-body">
+          A terminal-focused panel showing build containers, testing pipeline logs, server health status, and live log streaming.
+        </p>
+        <p class="modal-body">
+          <strong>Key Technologies:</strong> WebSockets, AWS EKS integration, Docker container APIs, terminal log parsers.
+        </p>
+      </div>
+
+      <!-- Modal Portfolio AI -->
+      <div class="modal-card glass-card" id="modal-portfolio-ai">
+        <button class="close-modal" aria-label="Close Modal">&times;</button>
+        <h3 class="modal-title">AI System Planner</h3>
+        <p class="modal-body">
+          Visual interface detailing prompt templates, dataset node routing, memory parameters, and agent orchestration maps.
+        </p>
+        <p class="modal-body">
+          <strong>Key Technologies:</strong> SVG canvas rendering, D3.js path connectors, JSON graph configurations.
+        </p>
+      </div>
+
+      <!-- Modal Portfolio Asset -->
+      <div class="modal-card glass-card" id="modal-portfolio-asset">
+        <button class="close-modal" aria-label="Close Modal">&times;</button>
+        <h3 class="modal-title">Modular Asset Library</h3>
+        <p class="modal-body">
+          A collaborative assets directory sharing CSS stylesheets, design tokens, responsive cards, and layout elements across teams.
+        </p>
+        <p class="modal-body">
+          <strong>Key Technologies:</strong> LocalStorage caching, hot-reloading configurations, SVG icons collections.
+        </p>
+      </div>
+    </div>
+
+    <!-- 6. Portfolio/Gallery Section -->
+    <section id="portfolio" class="portfolio section-padding">
+      <div class="container">
+        <div class="section-header text-center reveal">
+          <span class="section-subtitle">Our Integrations & Use Cases</span>
+          <h2 class="section-title">Built for Diverse Workflows</h2>
+          <p class="section-desc">See how teams across tech sectors rely on AetherFlow to deliver state-of-the-art products.</p>
+        </div>
+        
+        <div class="portfolio-grid">
+          <!-- Item 1 -->
+          <article class="portfolio-item glass-card reveal">
+            <div class="portfolio-image-wrapper">
+              <img src="assets/images/about.png" alt="SaaS Application UI Mockup" class="portfolio-img" loading="lazy">
+            </div>
+            <div class="portfolio-overlay">
+              <h3 class="portfolio-item-title">SaaS Workspace</h3>
+              <p class="portfolio-item-category">Productivity Platform</p>
+              <button class="portfolio-btn open-modal-btn" data-target="modal-portfolio-saas">View Details</button>
+            </div>
+          </article>
+          
+          <!-- Item 2 -->
+          <article class="portfolio-item glass-card reveal delay-1">
+            <div class="portfolio-image-wrapper">
+              <img src="assets/images/hero.png" alt="Fintech Web Dashboard UI" class="portfolio-img" loading="lazy">
+            </div>
+            <div class="portfolio-overlay">
+              <h3 class="portfolio-item-title">Fintech Dashboard</h3>
+              <p class="portfolio-item-category">Real-time Analytics</p>
+              <button class="portfolio-btn open-modal-btn" data-target="modal-portfolio-fintech">View Details</button>
+            </div>
+          </article>
+          
+          <!-- Item 3 -->
+          <article class="portfolio-item glass-card reveal delay-2">
+            <div class="portfolio-image-wrapper">
+              <img src="assets/images/about.png" alt="E-Commerce Mobile Design mockup" class="portfolio-img" loading="lazy">
+            </div>
+            <div class="portfolio-overlay">
+              <h3 class="portfolio-item-title">E-Commerce Mobile</h3>
+              <p class="portfolio-item-category">Interface Design</p>
+              <button class="portfolio-btn open-modal-btn" data-target="modal-portfolio-ecommerce">View Details</button>
+            </div>
+          </article>
+
+          <!-- Item 4 -->
+          <article class="portfolio-item glass-card reveal">
+            <div class="portfolio-image-wrapper">
+              <img src="assets/images/hero.png" alt="Developer Console Layout" class="portfolio-img" loading="lazy">
+            </div>
+            <div class="portfolio-overlay">
+              <h3 class="portfolio-item-title">Developer Console</h3>
+              <p class="portfolio-item-category">Build Pipelines</p>
+              <button class="portfolio-btn open-modal-btn" data-target="modal-portfolio-developer">View Details</button>
+            </div>
+          </article>
+
+          <!-- Item 5 -->
+          <article class="portfolio-item glass-card reveal delay-1">
+            <div class="portfolio-image-wrapper">
+              <img src="assets/images/about.png" alt="AI Agent Visual Planner Mockup" class="portfolio-img" loading="lazy">
+            </div>
+            <div class="portfolio-overlay">
+              <h3 class="portfolio-item-title">AI System Planner</h3>
+              <p class="portfolio-item-category">Machine Learning UI</p>
+              <button class="portfolio-btn open-modal-btn" data-target="modal-portfolio-ai">View Details</button>
+            </div>
+          </article>
+
+          <!-- Item 6 -->
+          <article class="portfolio-item glass-card reveal delay-2">
+            <div class="portfolio-image-wrapper">
+              <img src="assets/images/hero.png" alt="Asset Management Panel Mockup" class="portfolio-img" loading="lazy">
+            </div>
+            <div class="portfolio-overlay">
+              <h3 class="portfolio-item-title">Asset Library</h3>
+              <p class="portfolio-item-category">Design System Hub</p>
+              <button class="portfolio-btn open-modal-btn" data-target="modal-portfolio-asset">View Details</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Testimonials Section -->
+    <section id="testimonials" class="testimonials section-padding bg-alt">
+      <div class="container">
+        <div class="section-header text-center reveal">
+          <span class="section-subtitle">Testimonials</span>
+          <h2 class="section-title">Adopted by Leading Product Teams</h2>
+          <p class="section-desc">Hear how engineering directors, design leads, and developers optimize their workdays with AetherFlow.</p>
+        </div>
+        
+        <div class="testimonials-grid">
+          <!-- Card 1 -->
+          <article class="testimonial-card glass-card reveal">
+            <div class="stars">
+              <img src="assets/icons/star.svg" alt="Star Icon" class="star-icon">
+              <img src="assets/icons/star.svg" alt="Star Icon" class="star-icon">
+              <img src="assets/icons/star.svg" alt="Star Icon" class="star-icon">
+              <img src="assets/icons/star.svg" alt="Star Icon" class="star-icon">
+              <img src="assets/icons/star.svg" alt="Star Icon" class="star-icon">
+            </div>
+            <p class="testimonial-text">
+              "AetherFlow cut our design-to-live handoff delays by nearly 50%. The integration of design tokens and repository branches makes updates painless."
+            </p>
+            <div class="testimonial-user">
+              <div class="avatar-fallback">SH</div>
+              <div class="user-info">
+                <h4 class="user-name">Sarah Jenkins</h4>
+                <p class="user-title">VP of Product, CloudScale</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="testimonial-card glass-card reveal delay-1">
+            <div class="stars">
+              <img src="assets/icons/star.svg" alt="Star Icon" class="star-icon">
+              <img src="assets/icons/star.svg" alt="Star Icon" class="star-icon">
+              <img src="assets/icons/star.svg" alt="Star Icon" class="star-icon">
+              <img src="assets/icons/star.svg" alt="Star Icon" class="star-icon">
+              <img src="assets/icons/star.svg" alt="Star Icon" class="star-icon">
+            </div>
+            <p class="testimonial-text">
+              "We migrated all task tracking and build monitoring from separate systems into AetherFlow. The decrease in context-switching has boosted team morale immensely."
+            </p>
+            <div class="testimonial-user">
+              <div class="avatar-fallback">MC</div>
+              <div class="user-info">
+                <h4 class="user-name">Marcus Chen</h4>
+                <p class="user-title">Engineering Director, AppCore</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="testimonial-card glass-card reveal delay-2">
+            <div class="stars">
+              <img src="assets/icons/star.svg" alt="Star Icon" class="star-icon">
+              <img src="assets/icons/star.svg" alt="Star Icon" class="star-icon">
+              <img src="assets/icons/star.svg" alt="Star Icon" class="star-icon">
+              <img src="assets/icons/star.svg" alt="Star Icon" class="star-icon">
+              <img src="assets/icons/star.svg" alt="Star Icon" class="star-icon">
+            </div>
+            <p class="testimonial-text">
+              "Having live terminal pipelines right inside my card view is a game-changer. I can track the build process without ever leaving the collaborative interface."
+            </p>
+            <div class="testimonial-user">
+              <div class="avatar-fallback">EL</div>
+              <div class="user-info">
+                <h4 class="user-name">Elena Rostova</h4>
+                <p class="user-title">Lead Frontend Engineer, DevFlow</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. FAQ Section -->
+    <section id="faq" class="faq section-padding">
+      <div class="container">
+        <div class="section-header text-center reveal">
+          <span class="section-subtitle">Got Questions?</span>
+          <h2 class="section-title">Frequently Asked Questions</h2>
+          <p class="section-desc">Everything you need to know about starting your trial, integrations, and workspace scaling.</p>
+        </div>
+        
+        <div class="faq-container reveal">
+          <!-- FAQ 1 -->
+          <div class="faq-item glass-card">
+            <button class="faq-question" id="faq-q1" aria-expanded="false" aria-controls="faq-a1">
+              <span>Is there a free trial, and what does it include?</span>
+              <img src="assets/icons/chevron-down.svg" alt="Arrow" class="accordion-arrow">
+            </button>
+            <div class="faq-answer" id="faq-a1" role="region" aria-labelledby="faq-q1">
+              <div class="answer-content">
+                <p>Yes! We offer a 14-day free trial containing unlimited features for up to 10 team members. No credit card is required to sign up, and you can cancel at any point within the dashboard settings panel.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ 2 -->
+          <div class="faq-item glass-card">
+            <button class="faq-question" id="faq-q2" aria-expanded="false" aria-controls="faq-a2">
+              <span>Can we host AetherFlow on our own cloud infrastructure?</span>
+              <img src="assets/icons/chevron-down.svg" alt="Arrow" class="accordion-arrow">
+            </button>
+            <div class="faq-answer" id="faq-a2" role="region" aria-labelledby="faq-q2">
+              <div class="answer-content">
+                <p>Yes. In addition to our multi-tenant SaaS cloud model, we provide Enterprise plans that feature complete, isolated deployments on AWS, Google Cloud, Azure, or private Kubernetes clusters.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ 3 -->
+          <div class="faq-item glass-card">
+            <button class="faq-question" id="faq-q3" aria-expanded="false" aria-controls="faq-a3">
+              <span>How does live design token syncing function?</span>
+              <img src="assets/icons/chevron-down.svg" alt="Arrow" class="accordion-arrow">
+            </button>
+            <div class="faq-answer" id="faq-a3" role="region" aria-labelledby="faq-q3">
+              <div class="answer-content">
+                <p>When designers publish token modifications in Figma or Sketch (e.g. colors, spacing values), AetherFlow converts the changes into JSON formats, triggers a GitHub pull request containing the updated variables, and notifies developers instantly.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ 4 -->
+          <div class="faq-item glass-card">
+            <button class="faq-question" id="faq-q4" aria-expanded="false" aria-controls="faq-a4">
+              <span>Is the system compliant with global security policies?</span>
+              <img src="assets/icons/chevron-down.svg" alt="Arrow" class="accordion-arrow">
+            </button>
+            <div class="faq-answer" id="faq-a4" role="region" aria-labelledby="faq-q4">
+              <div class="answer-content">
+                <p>Absolutely. AetherFlow is fully SOC2 Type II audited, GDPR compliant, and encrypts all database fields both in transit and at rest. Multi-factor authentication (MFA) and SSO integrations are available out-of-the-box.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. Contact Section -->
+    <section id="contact" class="contact section-padding bg-alt">
+      <div class="container contact-grid">
+        <div class="contact-info reveal">
+          <span class="section-subtitle">Get in Touch</span>
+          <h2 class="section-title">Let's Build Something Exceptional Together</h2>
+          <p class="contact-desc">
+            Have questions about billing plans, need a customized enterprise trial, or want to discuss specific integrations? Fill out the form, and our solutions engineer will contact you in under two hours.
+          </p>
+          
+          <div class="info-list">
+            <div class="info-item">
+              <div class="info-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                  <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+              </div>
+              <div class="info-details">
+                <h4>Email Us</h4>
+                <p><a href="mailto:support@aetherflow.io">support@aetherflow.io</a></p>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <div class="info-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+              </div>
+              <div class="info-details">
+                <h4>Headquarters</h4>
+                <p>500 Tech Hub Boulevard, Suite 100, San Francisco, CA</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form-wrapper reveal delay-1">
+          <form class="contact-form glass-card" id="contact-form" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" class="form-input" placeholder="e.g. Jane Doe" required>
+                <span class="error-message" id="name-error" aria-live="polite"></span>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="email">Work Email</label>
+                <input type="email" id="email" name="email" class="form-input" placeholder="e.g. jane@company.com" required>
+                <span class="error-message" id="email-error" aria-live="polite"></span>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" name="subject" class="form-input" placeholder="How can we help?" required>
+                <span class="error-message" id="subject-error" aria-live="polite"></span>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" class="form-input" rows="5" placeholder="Tell us about your team size, workflow needs, or questions..." required></textarea>
+                <span class="error-message" id="message-error" aria-live="polite"></span>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block" id="form-submit-btn">Send Message</button>
+            <div class="form-success-msg" id="form-success-msg" role="status"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 10. Footer -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <!-- Footer Brand -->
+      <div class="footer-brand">
+        <a href="#home" class="logo">
+          <img src="assets/icons/logo.svg" alt="AetherFlow Logo" class="logo-icon">
+          <span class="logo-text">AetherFlow</span>
+        </a>
+        <p class="footer-desc">
+          Building a faster, more integrated collaborative layer for teams shipping state-of-the-art software systems.
+        </p>
+        <div class="social-links">
+          <!-- Twitter -->
+          <a href="#" class="social-link" aria-label="Follow us on Twitter">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+            </svg>
+          </a>
+          <!-- GitHub -->
+          <a href="#" class="social-link" aria-label="View our code repositories on GitHub">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg>
+          </a>
+          <!-- LinkedIn -->
+          <a href="#" class="social-link" aria-label="Connect with us on LinkedIn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+              <rect x="2" y="9" width="4" height="12"></rect>
+              <circle cx="4" cy="4" r="2"></circle>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Links 1 -->
+      <div class="footer-links">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#portfolio">Integrations</a></li>
+          <li><a href="#">Security Details</a></li>
+          <li><a href="#">Roadmap</a></li>
+        </ul>
+      </div>
+
+      <!-- Quick Links 2 -->
+      <div class="footer-links">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Customers</a></li>
+          <li><a href="#">Partner Program</a></li>
+          <li><a href="#">Contact Sales</a></li>
+        </ul>
+      </div>
+
+      <!-- Quick Links 3 -->
+      <div class="footer-links">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#faq">Help Center</a></li>
+          <li><a href="#">System Status</a></li>
+          <li><a href="#">Developer Portal</a></li>
+          <li><a href="#">API docs</a></li>
+          <li><a href="#">Terms & Privacy</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Copyright and Bottom Info -->
+    <div class="container footer-bottom">
+      <p>&copy; 2026 AetherFlow Technologies Inc. All rights reserved.</p>
+      <p>Project 1 - Full Stack Development Portfolio</p>
+    </div>
+  </footer>
+
+  <!-- Scroll to Top Button -->
+  <button id="scroll-to-top" class="scroll-to-top" aria-label="Scroll back to top">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="12" y1="19" x2="12" y2="5"></line>
+      <polyline points="5 12 12 5 19 12"></polyline>
+    </svg>
+  </button>
+
+</body>
+</html>

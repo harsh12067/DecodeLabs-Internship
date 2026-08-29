@@ -237,7 +237,7 @@ The project is deployed on **Netlify** with automatic builds from the `main` bra
 ### Steps
 1. Push code to `main` branch on GitHub
 2. Netlify automatically detects `netlify.toml` and runs `npm run build`
-3. Set `ANTHROPIC_API_KEY` in Netlify → Site Settings → Environment Variables
+3. Set `GEMINI_API_KEY` in Netlify → Site Settings → Environment Variables
 4. Netlify deploys the `dist/` folder and registers the serverless function
 
 ### Rollback Plan
@@ -249,7 +249,7 @@ If a production deployment introduces a critical regression:
 
 ## Known Limitations
 
-- The AI feature requires an active Anthropic API key. Without it, the assistant returns a service configuration error.
+- The AI feature requires an active Gemini API key. Without it, the assistant returns a service configuration error.
 - Locally testing the AI feature requires the Netlify CLI (`netlify dev`) to emulate serverless functions.
 - The `og-image.png` Open Graph image referenced in `index.html` should be created and placed in `/public/` for social sharing previews.
 

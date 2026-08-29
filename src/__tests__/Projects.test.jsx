@@ -1,11 +1,11 @@
-import { describe, it, expect } from 'vitest';
-import { render, screen, within } from '@testing-library/react';
+import { describe, it, expect, vi } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import Projects from '../components/Projects';
 
 // Mock image imports
-vi.mock('../assets/project_sms.png', () => ({ default: 'sms.png' }));
 vi.mock('../assets/project_portfolio.png', () => ({ default: 'portfolio.png' }));
-vi.mock('../assets/project_ecommerce.png', () => ({ default: 'ecommerce.png' }));
+vi.mock('../assets/project_aetherflow.png', () => ({ default: 'aetherflow.png' }));
+vi.mock('../assets/project_backend.png', () => ({ default: 'backend.png' }));
 
 describe('Projects', () => {
   it('renders the section heading', () => {
@@ -18,28 +18,26 @@ describe('Projects', () => {
     expect(screen.getAllByRole('article')).toHaveLength(3);
   });
 
-  it('renders Student Management System project', () => {
-    render(<Projects />);
-    expect(screen.getByText('Student Management System')).toBeInTheDocument();
-  });
-
   it('renders Personal Portfolio Website project', () => {
     render(<Projects />);
     expect(screen.getByText('Personal Portfolio Website')).toBeInTheDocument();
   });
 
-  it('renders E-Commerce Website project', () => {
+  it('renders AetherFlow Landing Page project', () => {
     render(<Projects />);
-    expect(screen.getByText('E-Commerce Website')).toBeInTheDocument();
+    expect(screen.getByText('AetherFlow Landing Page')).toBeInTheDocument();
+  });
+
+  it('renders Backend API project', () => {
+    render(<Projects />);
+    expect(screen.getByText('Backend API')).toBeInTheDocument();
   });
 
   it('renders technology tags for each project', () => {
     render(<Projects />);
-    // React should appear in both Portfolio and E-Commerce projects
     expect(screen.getAllByText('React.js').length).toBeGreaterThan(0);
-    // Java appears in both the hover badge and the tech tag list
-    expect(screen.getAllByText('Java').length).toBeGreaterThan(0);
-    expect(screen.getByText('Node.js')).toBeInTheDocument();
+    expect(screen.getAllByText('HTML5').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('Node.js').length).toBeGreaterThan(0);
   });
 
   it('renders project images with descriptive alt text', () => {
@@ -51,16 +49,17 @@ describe('Projects', () => {
     });
   });
 
-  it('renders live demo link for portfolio project', () => {
+  it('renders live demo link for portfolio and aetherflow projects', () => {
     render(<Projects />);
-    const liveLinks = screen.getAllByRole('link', { name: /view personal portfolio website live demo/i });
+    const liveLinks = screen.getAllByRole('link', { name: /view .* live demo/i });
+    expect(liveLinks.length).toBeGreaterThan(0);
     expect(liveLinks[0]).toHaveAttribute('href', 'https://portfolioowebb.netlify.app/');
   });
 
-  it('shows private project label for projects without GitHub links', () => {
+  it('shows private project or code links properly', () => {
     render(<Projects />);
-    // Student Management System and E-Commerce have no githubLink
-    expect(screen.getAllByText('Private project').length).toBeGreaterThan(0);
+    const codeLinks = screen.getAllByRole('link', { name: /view .* source code on github/i });
+    expect(codeLinks.length).toBeGreaterThan(0);
   });
 
   it('renders the projects section with correct id', () => {
