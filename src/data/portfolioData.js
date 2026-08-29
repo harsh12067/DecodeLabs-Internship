@@ -113,6 +113,22 @@ export const portfolioData = {
     },
     {
       id: 2,
+      title: 'SkillSwap Platform',
+      description:
+        'A peer-to-peer learning and skill exchange web application built with Next.js 16 (App Router), React 19, TypeScript, and Tailwind CSS. Features dynamic profile matching, user dashboards, interactive skill search registry, and real-time chat mockups.',
+      technologies: ['Next.js', 'React.js', 'TypeScript', 'Tailwind CSS', 'Vercel'],
+      category: ['fullstack', 'Next.js', 'React', 'web'],
+      liveLink: 'https://skillswap-next-rho.vercel.app/',
+      githubLink: 'https://github.com/harsh12067/skillswap-next',
+      highlights: [
+        'Next.js 16 App Router architecture with React 19',
+        'Dynamic swapper matching & interactive skill registry',
+        'Responsive dashboard, chat interface, and scheduling calendar',
+        'TypeScript type safety & modern Tailwind CSS v4 styling',
+      ],
+    },
+    {
+      id: 3,
       title: 'AetherFlow Landing Page',
       description:
         'A modern, professional, and fully responsive SaaS landing page for engineering and product teams built completely from scratch using semantic HTML5, pure CSS3 with glassmorphism, and Vanilla JavaScript.',
@@ -128,7 +144,7 @@ export const portfolioData = {
       ],
     },
     {
-      id: 3,
+      id: 4,
       title: 'Backend API',
       description:
         'A complete, modular, and lightweight Backend RESTful API built with Node.js and Express.js implementing a full User Management system with CRUD endpoints, asynchronous JSON file storage, and custom input validation middleware.',

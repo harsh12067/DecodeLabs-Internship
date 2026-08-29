@@ -2,14 +2,16 @@ import React from 'react';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import { portfolioData } from '../data/portfolioData';
 import portfolioImg from '../assets/project_portfolio.png';
+import skillswapImg from '../assets/project_skillswap.png';
 import aetherflowImg from '../assets/project_aetherflow.png';
 import backendImg from '../assets/project_backend.png';
 
 // Map project IDs to local images
 const projectImages = {
   1: portfolioImg,
-  2: aetherflowImg,
-  3: backendImg,
+  2: skillswapImg,
+  3: aetherflowImg,
+  4: backendImg,
 };
 
 export default function Projects() {
