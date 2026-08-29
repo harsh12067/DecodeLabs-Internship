@@ -236,11 +236,11 @@ export const handler = async (event) => {
     }
 
     // Meaningful error messages for common API errors
-    const errorMsg = error?.message || '';
-    let userFriendlyError = 'AI service error. Please try again.';
+    const errorMsg = error?.message || (typeof error === 'string' ? error : '');
+    let userFriendlyError = errorMsg ? `AI service error: ${errorMsg}` : 'AI service error. Please try again.';
 
     if (errorMsg.includes('API_KEY_INVALID') || errorMsg.includes('API key not valid')) {
-      userFriendlyError = 'Invalid Gemini API key. Please check your GEMINI_API_KEY setting.';
+      userFriendlyError = 'Invalid Gemini API key. Please check your GEMINI_API_KEY setting in Netlify.';
     } else if (errorMsg.includes('QUOTA_EXCEEDED') || errorMsg.includes('RESOURCE_EXHAUSTED')) {
       userFriendlyError = 'Gemini API quota exceeded. Please try again in a few moments.';
     } else if (errorMsg.includes('PERMISSION_DENIED')) {
