@@ -9,7 +9,7 @@
  *                                          ← Structured JSON ←
  *
  * SDK:     @google/genai (official Google GenAI JavaScript SDK)
- * Model:   gemini-2.0-flash (fast, cost-effective, strong instruction-following)
+ * Model:   gemini-2.5-flash (fast, cost-effective, strong instruction-following)
  */
 
 import { GoogleGenAI } from '@google/genai';
@@ -169,7 +169,7 @@ export const handler = async (event) => {
     const systemPrompt = buildSystemPrompt(portfolioData);
 
     const response = await ai.models.generateContent({
-      model: 'gemini-2.0-flash',
+      model: 'gemini-2.5-flash',
       contents: question,
       config: {
         systemInstruction: systemPrompt,
