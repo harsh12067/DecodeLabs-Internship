@@ -9,7 +9,7 @@
  *                                          ← Structured JSON ←
  *
  * SDK:     @google/genai (official Google GenAI JavaScript SDK)
- * Model:   gemini-2.5-flash (fast, cost-effective, strong instruction-following)
+ * Primary: gemini-2.5-flash (with auto-fallback to gemini-2.0-flash / gemini-1.5-flash)
  */
 
 import { GoogleGenAI } from '@google/genai';
@@ -160,7 +160,7 @@ export const handler = async (event) => {
     console.error('GEMINI_API_KEY is not configured');
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'AI service is not configured' }),
+      body: JSON.stringify({ error: 'GEMINI_API_KEY is not configured. Please add it to your environment variables.' }),
     };
   }
 
@@ -168,17 +168,42 @@ export const handler = async (event) => {
     const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
     const systemPrompt = buildSystemPrompt(portfolioData);
 
-    const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash',
-      contents: question,
-      config: {
-        systemInstruction: systemPrompt,
-        maxOutputTokens: 600,
-        temperature: 0.2, // Low temperature for factual, grounded answers
-      },
-    });
+    // List of model candidates in priority order (ensures resilient failover across Gemini versions)
+    const candidateModels = [
+      'gemini-2.5-flash',
+      'gemini-2.0-flash',
+      'gemini-1.5-flash',
+      'gemini-1.5-flash-latest',
+    ];
 
-    const rawText = response.text ?? '';
+    let response = null;
+    let lastError = null;
+
+    for (const modelName of candidateModels) {
+      try {
+        response = await ai.models.generateContent({
+          model: modelName,
+          contents: question,
+          config: {
+            systemInstruction: systemPrompt,
+            maxOutputTokens: 600,
+            temperature: 0.2, // Low temperature for factual, grounded answers
+          },
+        });
+        if (response && response.text) {
+          break;
+        }
+      } catch (err) {
+        lastError = err;
+        console.warn(`Model ${modelName} attempt failed, trying fallback...`, err?.message || err);
+      }
+    }
+
+    if (!response && lastError) {
+      throw lastError;
+    }
+
+    const rawText = response?.text ?? '';
     const parsed = parseAIResponse(rawText);
 
     if (!parsed) {
@@ -206,13 +231,26 @@ export const handler = async (event) => {
     if (error.message?.includes('timeout') || error.code === 'ETIMEDOUT') {
       return {
         statusCode: 504,
-        body: JSON.stringify({ error: 'timeout' }),
+        body: JSON.stringify({ error: 'The request timed out. Please try again.' }),
       };
+    }
+
+    // Meaningful error messages for common API errors
+    const errorMsg = error?.message || '';
+    let userFriendlyError = 'AI service error. Please try again.';
+
+    if (errorMsg.includes('API_KEY_INVALID') || errorMsg.includes('API key not valid')) {
+      userFriendlyError = 'Invalid Gemini API key. Please check your GEMINI_API_KEY setting.';
+    } else if (errorMsg.includes('QUOTA_EXCEEDED') || errorMsg.includes('RESOURCE_EXHAUSTED')) {
+      userFriendlyError = 'Gemini API quota exceeded. Please try again in a few moments.';
+    } else if (errorMsg.includes('PERMISSION_DENIED')) {
+      userFriendlyError = 'Permission denied for this Gemini API key.';
     }
 
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'AI service error. Please try again.' }),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ error: userFriendlyError }),
     };
   }
 };
