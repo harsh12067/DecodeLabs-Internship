@@ -20,26 +20,26 @@ export default function Skills() {
 
   const skillsData = [
     // Programming
-    { name: 'C / C++', level: 85, category: 'programming', icon: <SiCplusplus className="text-blue-600 w-8 h-8" aria-hidden="true" /> },
-    { name: 'Java', level: 80, category: 'programming', icon: <FaJava className="text-red-500 w-8 h-8" aria-hidden="true" /> },
-    { name: 'Python', level: 75, category: 'programming', icon: <SiPython className="text-yellow-500 w-8 h-8" aria-hidden="true" /> },
-    { name: 'JavaScript', level: 80, category: 'programming', icon: <SiJavascript className="text-yellow-400 w-8 h-8" aria-hidden="true" /> },
+    { name: 'C / C++', level: 85, category: 'programming', icon: <SiCplusplus className="text-[#38BDF8] w-8 h-8" aria-hidden="true" /> },
+    { name: 'Java', level: 80, category: 'programming', icon: <FaJava className="text-[#38BDF8] w-8 h-8" aria-hidden="true" /> },
+    { name: 'Python', level: 75, category: 'programming', icon: <SiPython className="text-[#38BDF8] w-8 h-8" aria-hidden="true" /> },
+    { name: 'JavaScript', level: 80, category: 'programming', icon: <SiJavascript className="text-[#38BDF8] w-8 h-8" aria-hidden="true" /> },
     
     // Web Dev
-    { name: 'HTML5', level: 90, category: 'web', icon: <FaHtml5 className="text-orange-500 w-8 h-8" aria-hidden="true" /> },
-    { name: 'CSS3', level: 85, category: 'web', icon: <FaCss3Alt className="text-blue-500 w-8 h-8" aria-hidden="true" /> },
-    { name: 'React.js', level: 80, category: 'web', icon: <SiReact className="text-cyan-400 w-8 h-8" aria-hidden="true" /> },
-    { name: 'Bootstrap', level: 75, category: 'web', icon: <SiBootstrap className="text-purple-600 w-8 h-8" aria-hidden="true" /> },
-    { name: 'Tailwind CSS', level: 85, category: 'web', icon: <SiTailwindcss className="text-teal-400 w-8 h-8" aria-hidden="true" /> },
+    { name: 'HTML5', level: 90, category: 'web', icon: <FaHtml5 className="text-[#38BDF8] w-8 h-8" aria-hidden="true" /> },
+    { name: 'CSS3', level: 85, category: 'web', icon: <FaCss3Alt className="text-[#38BDF8] w-8 h-8" aria-hidden="true" /> },
+    { name: 'React.js', level: 80, category: 'web', icon: <SiReact className="text-[#38BDF8] w-8 h-8" aria-hidden="true" /> },
+    { name: 'Bootstrap', level: 75, category: 'web', icon: <SiBootstrap className="text-[#38BDF8] w-8 h-8" aria-hidden="true" /> },
+    { name: 'Tailwind CSS', level: 85, category: 'web', icon: <SiTailwindcss className="text-[#38BDF8] w-8 h-8" aria-hidden="true" /> },
     
     // Databases
-    { name: 'MySQL', level: 78, category: 'database', icon: <SiMysql className="text-blue-400 w-8 h-8" aria-hidden="true" /> },
-    { name: 'MongoDB', level: 70, category: 'database', icon: <SiMongodb className="text-green-500 w-8 h-8" aria-hidden="true" /> },
+    { name: 'MySQL', level: 78, category: 'database', icon: <SiMysql className="text-[#38BDF8] w-8 h-8" aria-hidden="true" /> },
+    { name: 'MongoDB', level: 70, category: 'database', icon: <SiMongodb className="text-[#38BDF8] w-8 h-8" aria-hidden="true" /> },
     
     // Tools
-    { name: 'Git', level: 80, category: 'tools', icon: <SiGit className="text-orange-600 w-8 h-8" aria-hidden="true" /> },
-    { name: 'GitHub', level: 85, category: 'tools', icon: <SiGithub className="text-slate-800 dark:text-white w-8 h-8" aria-hidden="true" /> },
-    { name: 'VS Code', level: 90, category: 'tools', icon: <FaCode className="text-blue-500 w-8 h-8" aria-hidden="true" /> }
+    { name: 'Git', level: 80, category: 'tools', icon: <SiGit className="text-[#38BDF8] w-8 h-8" aria-hidden="true" /> },
+    { name: 'GitHub', level: 85, category: 'tools', icon: <SiGithub className="text-[#38BDF8] w-8 h-8" aria-hidden="true" /> },
+    { name: 'VS Code', level: 90, category: 'tools', icon: <FaCode className="text-[#38BDF8] w-8 h-8" aria-hidden="true" /> }
   ];
 
   const filteredSkills = activeTab === 'all' 
@@ -52,18 +52,18 @@ export default function Skills() {
         
         {/* Section Header */}
         <div className="text-center mb-16" data-aos="fade-up">
-          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white inline-block relative pb-2">
+          <h2 className="text-3xl sm:text-4xl font-bold text-[#F8FAFC] inline-block relative pb-2">
             My Skills
-            <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-purple-500 rounded-full" aria-hidden="true" />
+            <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-[#38BDF8] rounded-full shadow-[0_0_10px_rgba(56,189,248,0.6)]" aria-hidden="true" />
           </h2>
-          <p className="text-slate-500 dark:text-slate-400 mt-3 max-w-2xl mx-auto">
+          <p className="text-[#94A3B8] mt-3 max-w-2xl mx-auto">
             A comprehensive list of technologies, frameworks, and programming languages that I specialize in.
           </p>
         </div>
 
         {/* Tab Selector — accessible tablist */}
         <div
-          className="flex flex-wrap items-center justify-center gap-2 mb-12"
+          className="flex flex-wrap items-center justify-center gap-2.5 mb-12"
           role="tablist"
           aria-label="Filter skills by category"
           data-aos="fade-up"
@@ -77,10 +77,10 @@ export default function Skills() {
               id={`skills-tab-${category.id}`}
               onClick={() => setActiveTab(category.id)}
               className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300
-                focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 ${
+                focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 ${
                 activeTab === category.id
-                  ? 'bg-gradient-to-r from-purple-500 to-indigo-600 text-white shadow-md shadow-purple-500/20'
-                  : 'bg-slate-100 dark:bg-navy-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-navy-700'
+                  ? 'bg-gradient-to-r from-blue-600 to-sky-400 text-white shadow-lg shadow-sky-500/25 scale-105'
+                  : 'bg-[#111827] border border-sky-500/20 text-[#CBD5E1] hover:bg-[#172033] hover:border-sky-400/50 hover:text-white'
               }`}
             >
               {category.name}
@@ -104,22 +104,22 @@ export default function Skills() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
-              className="glass-card p-6 rounded-2xl flex items-center gap-6 hover:shadow-lg hover:shadow-purple-500/5 transition-all duration-300"
+              className="glass-card p-6 rounded-2xl flex items-center gap-6 border border-sky-500/20 hover:border-sky-400/60 hover:bg-[#172033] hover:shadow-[0_0_20px_rgba(56,189,248,0.2)] transform hover:-translate-y-1 transition-all duration-300"
             >
               {/* Skill Icon */}
-              <div className="p-3 bg-slate-100/80 dark:bg-navy-800/80 rounded-xl flex items-center justify-center flex-shrink-0">
+              <div className="p-3.5 bg-[#0B1120] border border-sky-500/25 rounded-xl flex items-center justify-center flex-shrink-0 shadow-inner">
                 {skill.icon}
               </div>
 
               {/* Progress Detail */}
               <div className="flex-1">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="font-semibold text-slate-800 dark:text-slate-100">{skill.name}</span>
-                  <span className="text-sm font-bold text-purple-500 dark:text-purple-400" aria-hidden="true">{skill.level}%</span>
+                  <span className="font-semibold text-[#F8FAFC]">{skill.name}</span>
+                  <span className="text-sm font-bold text-[#38BDF8]" aria-hidden="true">{skill.level}%</span>
                 </div>
                 {/* Progress Bar */}
                 <div
-                  className="w-full h-2.5 bg-slate-200 dark:bg-navy-700 rounded-full overflow-hidden"
+                  className="w-full h-2.5 bg-[#0B1120] rounded-full overflow-hidden border border-sky-500/15"
                   role="progressbar"
                   aria-valuenow={skill.level}
                   aria-valuemin={0}
@@ -127,7 +127,7 @@ export default function Skills() {
                   aria-label={`${skill.name} proficiency: ${skill.level}%`}
                 >
                   <motion.div
-                    className="h-full bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full"
+                    className="h-full bg-gradient-to-r from-blue-600 to-sky-400 rounded-full shadow-[0_0_10px_rgba(56,189,248,0.5)]"
                     initial={{ width: 0 }}
                     whileInView={{ width: `${skill.level}%` }}
                     viewport={{ once: true }}

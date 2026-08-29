@@ -17,7 +17,7 @@ const SUGGESTED_QUESTIONS = [
   'What projects are available?',
   'Which projects use React?',
   'What technologies does Harsh know?',
-  'Tell me about the E-Commerce project.',
+  'Tell me about the SkillSwap project.',
   'What skills does this portfolio demonstrate?',
   'What is Harsh\'s experience?',
   'Which project is best for AI interest?',
@@ -104,15 +104,14 @@ export default function AskPortfolio() {
     }
 
     setAiState(AI_STATE.LOADING);
-    setResponse(null);
     setErrorMessage('');
 
-    // 15-second timeout
+    // Setup 15s client timeout
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 15000);
 
     try {
-      const res = await fetch('/api/ask-portfolio', {
+      const res = await fetch('/.netlify/functions/ask-portfolio', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ question: trimmed }),
@@ -122,21 +121,23 @@ export default function AskPortfolio() {
       clearTimeout(timeoutId);
 
       if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        if (res.status === 504 || data.error === 'timeout') {
-          setAiState(AI_STATE.TIMEOUT);
-          return;
+        let errMsg = 'Something went wrong. Please try again.';
+        try {
+          const errData = await res.json();
+          if (errData.error) errMsg = errData.error;
+        } catch {
+          // ignore json parse error
         }
-        setErrorMessage(data.error || 'Something went wrong. Please try again.');
+        setErrorMessage(errMsg);
         setAiState(AI_STATE.ERROR);
         return;
       }
 
       const data = await res.json();
 
-      // Validate structure
-      if (!data || typeof data.answer !== 'string') {
-        setErrorMessage('Received an unexpected response. Please try again.');
+      // Validate structured response shape
+      if (typeof data.answer !== 'string') {
+        setErrorMessage('Invalid response format from AI assistant.');
         setAiState(AI_STATE.ERROR);
         return;
       }
@@ -148,7 +149,7 @@ export default function AskPortfolio() {
       if (err.name === 'AbortError') {
         setAiState(AI_STATE.TIMEOUT);
       } else {
-        setErrorMessage('Something went wrong. Please check your connection and try again.');
+        setErrorMessage('Could not connect to AI assistant. Please check your connection.');
         setAiState(AI_STATE.ERROR);
       }
     }
@@ -169,10 +170,10 @@ export default function AskPortfolio() {
   };
 
   const resetToIdle = () => {
-    setAiState(AI_STATE.IDLE);
     setQuestion('');
     setResponse(null);
     setErrorMessage('');
+    setAiState(AI_STATE.IDLE);
     setTimeout(() => inputRef.current?.focus(), 50);
   };
 
@@ -186,11 +187,11 @@ export default function AskPortfolio() {
         aria-expanded={isOpen}
         aria-haspopup="dialog"
         className="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-5 py-3 rounded-full
-          bg-gradient-to-r from-purple-500 to-indigo-600 text-white font-semibold text-sm
-          shadow-lg shadow-purple-500/30 hover:shadow-purple-500/50
-          hover:from-purple-600 hover:to-indigo-700
+          bg-gradient-to-r from-blue-600 to-sky-400 text-white font-semibold text-sm
+          shadow-lg shadow-sky-500/30 hover:shadow-sky-500/50
+          hover:from-blue-500 hover:to-sky-300
           transition-all duration-300 transform hover:-translate-y-1 active:translate-y-0
-          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-950"
+          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B1120]"
       >
         <HiSparkles className="w-4 h-4" aria-hidden="true" />
         <span>Ask My Portfolio</span>
@@ -208,7 +209,7 @@ export default function AskPortfolio() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
               onClick={closePanel}
-              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50"
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50"
               aria-hidden="true"
             />
 
@@ -224,27 +225,27 @@ export default function AskPortfolio() {
               exit={{ opacity: 0, y: 40, scale: 0.95 }}
               transition={{ type: 'spring', stiffness: 300, damping: 28 }}
               className="fixed bottom-20 right-4 sm:right-6 z-50 w-[calc(100vw-2rem)] max-w-sm
-                glass-card rounded-3xl border border-white/10 dark:border-white/5
-                shadow-2xl shadow-purple-900/30 flex flex-col overflow-hidden"
+                bg-[#0F172A] rounded-3xl border border-sky-500/25
+                shadow-2xl shadow-sky-950/60 flex flex-col overflow-hidden"
               style={{ maxHeight: 'min(560px, calc(100vh - 120px))' }}
             >
               {/* Panel Header */}
-              <div className="flex items-center justify-between px-5 py-4 border-b border-white/10 dark:border-white/5 flex-shrink-0">
-                <div className="flex items-center gap-2">
-                  <span className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center shadow-md" aria-hidden="true">
+              <div className="flex items-center justify-between px-5 py-4 border-b border-sky-500/15 flex-shrink-0 bg-[#0B1120]/50">
+                <div className="flex items-center gap-2.5">
+                  <span className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-600 to-sky-400 flex items-center justify-center shadow-md shadow-sky-500/25" aria-hidden="true">
                     <HiSparkles className="w-4 h-4 text-white" />
                   </span>
                   <div>
-                    <p className="text-sm font-bold text-slate-800 dark:text-slate-100 leading-none">Ask My Portfolio</p>
-                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">AI-powered portfolio guide</p>
+                    <p className="text-sm font-bold text-[#F8FAFC] leading-none">Ask My Portfolio</p>
+                    <p className="text-xs text-[#94A3B8] mt-0.5">AI-powered portfolio guide</p>
                   </div>
                 </div>
                 <button
                   onClick={closePanel}
                   aria-label="Close AI assistant"
-                  className="p-1.5 rounded-lg text-slate-500 hover:text-slate-700 dark:hover:text-slate-200
-                    hover:bg-slate-100 dark:hover:bg-navy-800 transition-colors
-                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"
+                  className="p-1.5 rounded-lg text-[#CBD5E1] hover:text-[#38BDF8]
+                    hover:bg-[#111827] transition-colors
+                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
                 >
                   <FiX className="w-4 h-4" aria-hidden="true" />
                 </button>
@@ -256,20 +257,20 @@ export default function AskPortfolio() {
                 {/* IDLE State */}
                 {aiState === AI_STATE.IDLE && (
                   <div className="space-y-4">
-                    <p className="text-sm text-slate-600 dark:text-slate-400">
+                    <p className="text-sm text-[#94A3B8]">
                       Ask me anything about this portfolio — projects, skills, experience, or technologies.
                     </p>
                     <div>
-                      <p className="text-xs font-semibold text-slate-500 dark:text-slate-500 uppercase tracking-wider mb-2">Suggested Questions</p>
+                      <p className="text-xs font-semibold text-[#CBD5E1] uppercase tracking-wider mb-2">Suggested Questions</p>
                       <div className="flex flex-wrap gap-2">
                         {SUGGESTED_QUESTIONS.map((q) => (
                           <button
                             key={q}
                             onClick={() => handleSuggestion(q)}
-                            className="text-xs px-3 py-1.5 rounded-full bg-slate-100 dark:bg-navy-800
-                              text-slate-600 dark:text-slate-300 hover:bg-purple-100 dark:hover:bg-purple-900/40
-                              hover:text-purple-700 dark:hover:text-purple-300 transition-colors
-                              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"
+                            className="text-xs px-3 py-1.5 rounded-full bg-[#111827] border border-sky-500/20
+                              text-[#CBD5E1] hover:bg-[#172033] hover:border-sky-400/60
+                              hover:text-[#38BDF8] transition-all
+                              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
                           >
                             {q}
                           </button>
@@ -282,10 +283,10 @@ export default function AskPortfolio() {
                 {/* EMPTY State */}
                 {aiState === AI_STATE.EMPTY && (
                   <div className="text-center py-4">
-                    <p className="text-sm text-amber-600 dark:text-amber-400 font-medium" role="alert">
+                    <p className="text-sm text-amber-400 font-medium" role="alert">
                       ⚠️ Please enter a question first.
                     </p>
-                    <button onClick={resetToIdle} className="mt-3 text-xs text-purple-500 hover:text-purple-400 underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 rounded">
+                    <button onClick={resetToIdle} className="mt-3 text-xs text-[#38BDF8] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 rounded">
                       Go back
                     </button>
                   </div>
@@ -298,12 +299,12 @@ export default function AskPortfolio() {
                       {[0, 1, 2].map((i) => (
                         <span
                           key={i}
-                          className="w-2 h-2 rounded-full bg-purple-500 animate-bounce"
+                          className="w-2 h-2 rounded-full bg-[#38BDF8] animate-bounce"
                           style={{ animationDelay: `${i * 0.15}s` }}
                         />
                       ))}
                     </div>
-                    <span className="text-sm text-slate-500 dark:text-slate-400">🤖 Thinking...</span>
+                    <span className="text-sm text-[#94A3B8]">🤖 Thinking...</span>
                   </div>
                 )}
 
@@ -312,14 +313,14 @@ export default function AskPortfolio() {
                   <div className="space-y-4" aria-live="polite">
                     {/* Question echo */}
                     <div className="flex justify-end">
-                      <span className="text-xs max-w-[80%] bg-purple-500/20 text-purple-200 px-3 py-2 rounded-2xl rounded-br-sm">
+                      <span className="text-xs max-w-[80%] bg-sky-500/15 border border-sky-500/30 text-[#38BDF8] px-3.5 py-2 rounded-2xl rounded-br-sm font-medium">
                         {question}
                       </span>
                     </div>
 
                     {/* Answer */}
-                    <div className="bg-slate-100/80 dark:bg-navy-800/80 rounded-2xl rounded-bl-sm p-4">
-                      <p className="text-sm text-slate-700 dark:text-slate-200 leading-relaxed whitespace-pre-wrap">
+                    <div className="bg-[#111827] border border-sky-500/20 rounded-2xl rounded-bl-sm p-4">
+                      <p className="text-sm text-[#F8FAFC] leading-relaxed whitespace-pre-wrap">
                         {response.answer}
                       </p>
                     </div>
@@ -327,12 +328,12 @@ export default function AskPortfolio() {
                     {/* Related Projects */}
                     {response.relatedProjects?.length > 0 && (
                       <div>
-                        <p className="text-xs font-semibold text-slate-500 dark:text-slate-500 uppercase tracking-wider mb-2">Related Projects</p>
+                        <p className="text-xs font-semibold text-[#CBD5E1] uppercase tracking-wider mb-2">Related Projects</p>
                         <div className="space-y-2">
                           {response.relatedProjects.map((proj) => (
-                            <div key={proj.name} className="glass-card p-3 rounded-xl border-l-2 border-l-purple-500">
-                              <p className="text-xs font-bold text-slate-800 dark:text-slate-100">{proj.name}</p>
-                              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">{proj.reason}</p>
+                            <div key={proj.name} className="glass-card p-3 rounded-xl border-l-2 border-l-[#38BDF8]">
+                              <p className="text-xs font-bold text-[#F8FAFC]">{proj.name}</p>
+                              <p className="text-xs text-[#94A3B8] mt-0.5">{proj.reason}</p>
                             </div>
                           ))}
                         </div>
@@ -342,7 +343,7 @@ export default function AskPortfolio() {
                     {/* Ask another */}
                     <button
                       onClick={resetToIdle}
-                      className="text-xs text-purple-500 hover:text-purple-400 underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 rounded"
+                      className="text-xs text-[#38BDF8] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 rounded"
                     >
                       Ask another question
                     </button>
@@ -359,15 +360,15 @@ export default function AskPortfolio() {
                       <button
                         onClick={handleRetry}
                         className="flex items-center gap-1.5 text-xs font-semibold px-4 py-2 rounded-full
-                          bg-gradient-to-r from-purple-500 to-indigo-600 text-white
-                          hover:from-purple-600 hover:to-indigo-700 transition-all
-                          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"
+                          bg-gradient-to-r from-blue-600 to-sky-400 text-white
+                          hover:from-blue-500 hover:to-sky-300 transition-all
+                          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
                       >
                         <FiRefreshCw className="w-3 h-3" aria-hidden="true" /> Retry
                       </button>
                       <button
                         onClick={resetToIdle}
-                        className="text-xs text-slate-400 hover:text-slate-200 underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 rounded"
+                        className="text-xs text-[#94A3B8] hover:text-[#F8FAFC] underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 rounded"
                       >
                         New question
                       </button>
@@ -385,15 +386,15 @@ export default function AskPortfolio() {
                       <button
                         onClick={handleRetry}
                         className="flex items-center gap-1.5 text-xs font-semibold px-4 py-2 rounded-full
-                          bg-gradient-to-r from-purple-500 to-indigo-600 text-white
-                          hover:from-purple-600 hover:to-indigo-700 transition-all
-                          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"
+                          bg-gradient-to-r from-blue-600 to-sky-400 text-white
+                          hover:from-blue-500 hover:to-sky-300 transition-all
+                          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
                       >
                         <FiRefreshCw className="w-3 h-3" aria-hidden="true" /> Retry
                       </button>
                       <button
                         onClick={resetToIdle}
-                        className="text-xs text-slate-400 hover:text-slate-200 underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 rounded"
+                        className="text-xs text-[#94A3B8] hover:text-[#F8FAFC] underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 rounded"
                       >
                         New question
                       </button>
@@ -406,7 +407,7 @@ export default function AskPortfolio() {
               {(aiState === AI_STATE.IDLE || aiState === AI_STATE.EMPTY) && (
                 <form
                   onSubmit={handleSubmit}
-                  className="flex-shrink-0 px-4 py-3 border-t border-white/10 dark:border-white/5"
+                  className="flex-shrink-0 px-4 py-3 border-t border-sky-500/15 bg-[#0B1120]/60"
                   aria-label="Ask a question about this portfolio"
                 >
                   <div className="flex items-center gap-2">
@@ -422,10 +423,10 @@ export default function AskPortfolio() {
                       placeholder="Ask about projects, skills…"
                       maxLength={500}
                       autoComplete="off"
-                      className="flex-1 bg-slate-100 dark:bg-navy-800 text-slate-800 dark:text-slate-200
-                        text-sm rounded-full px-4 py-2 border border-transparent
-                        focus:outline-none focus:ring-2 focus:ring-purple-500
-                        placeholder:text-slate-400 dark:placeholder:text-slate-500"
+                      className="flex-1 bg-[#0B1120] text-[#F8FAFC]
+                        text-sm rounded-full px-4 py-2 border border-sky-500/25
+                        focus:outline-none focus:border-[#38BDF8] focus:ring-1 focus:ring-[#38BDF8]/40
+                        placeholder:text-[#64748B]"
                       aria-describedby={aiState === AI_STATE.EMPTY ? 'ask-empty-hint' : undefined}
                     />
                     {aiState === AI_STATE.EMPTY && (
@@ -434,10 +435,10 @@ export default function AskPortfolio() {
                     <button
                       type="submit"
                       aria-label="Submit question"
-                      className="w-9 h-9 flex-shrink-0 rounded-full bg-gradient-to-r from-purple-500 to-indigo-600
-                        flex items-center justify-center text-white
-                        hover:from-purple-600 hover:to-indigo-700 transition-all
-                        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"
+                      className="w-9 h-9 flex-shrink-0 rounded-full bg-gradient-to-r from-blue-600 to-sky-400
+                        flex items-center justify-center text-white shadow-md shadow-sky-500/25
+                        hover:from-blue-500 hover:to-sky-300 transition-all
+                        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
                     >
                       <FiSend className="w-4 h-4" aria-hidden="true" />
                     </button>

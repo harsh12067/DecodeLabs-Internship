@@ -33,22 +33,22 @@ export default function Education() {
   ];
 
   return (
-    <section id="education" className="py-20 bg-slate-100/50 dark:bg-navy-950/40 relative">
+    <section id="education" className="py-20 bg-[#0F172A]/40 rounded-3xl border border-sky-500/10 my-8 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
         <div className="text-center mb-16" data-aos="fade-up">
-          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white inline-block relative pb-2">
+          <h2 className="text-3xl sm:text-4xl font-bold text-[#F8FAFC] inline-block relative pb-2">
             Education
-            <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-purple-500 rounded-full" />
+            <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-[#38BDF8] rounded-full shadow-[0_0_10px_rgba(56,189,248,0.6)]" />
           </h2>
-          <p className="text-slate-500 dark:text-slate-400 mt-3 max-w-2xl mx-auto">
+          <p className="text-[#94A3B8] mt-3 max-w-2xl mx-auto">
             My academic journey and educational qualifications.
           </p>
         </div>
 
         {/* Timeline Layout */}
-        <div className="relative border-l-2 border-slate-200 dark:border-navy-700 ml-4 md:ml-8 space-y-12 max-w-4xl mx-auto">
+        <div className="relative border-l-2 border-sky-500/25 ml-4 md:ml-8 space-y-12 max-w-4xl mx-auto">
           {timelineData.map((item, index) => (
             <div 
               key={item.id} 
@@ -57,39 +57,32 @@ export default function Education() {
               data-aos-delay={index * 100}
             >
               {/* Floating Timeline Icon */}
-              <div className="absolute -left-5 top-1.5 p-2 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-full text-white shadow-md z-20">
+              <div className="absolute -left-5 top-1.5 p-2 bg-gradient-to-r from-blue-600 to-sky-400 rounded-full text-white shadow-md shadow-sky-500/30 z-20">
                 <FaGraduationCap className="w-4 h-4" />
               </div>
 
-              {/* Timeline Card */}
-              <div className="glass-card p-6 sm:p-8 rounded-2xl hover:shadow-lg transition-shadow duration-300">
+              {/* Education Card */}
+              <div className="glass-card p-6 sm:p-8 rounded-2xl hover:border-sky-400 hover:shadow-[0_0_20px_rgba(56,189,248,0.2)] transition-all duration-300">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
-                  <div>
-                    <h3 className="text-xl font-bold text-slate-800 dark:text-slate-100">
-                      {item.title}
-                    </h3>
-                    <p className="text-purple-600 dark:text-purple-400 font-medium text-sm">
-                      {item.subtitle}
-                    </p>
-                  </div>
-                  <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 w-fit">
+                  <span className="text-xs font-semibold px-3 py-1 bg-[#0B1120] text-[#38BDF8] border border-sky-500/20 rounded-full w-fit">
                     {item.period}
                   </span>
-                </div>
-
-                <p className="text-slate-600 dark:text-slate-400 text-sm mb-4">
-                  {item.institution}
-                </p>
-
-                <p className="text-slate-500 dark:text-slate-400 text-sm mb-4 leading-relaxed">
-                  {item.description}
-                </p>
-
-                <div className="border-t border-slate-100 dark:border-navy-700 pt-4 mt-2">
-                  <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">
-                    Result / Performance: <span className="text-purple-600 dark:text-purple-400">{item.grade}</span>
+                  <span className="text-xs font-bold text-[#38BDF8] bg-sky-500/10 border border-sky-500/20 px-3 py-1 rounded-full w-fit">
+                    {item.grade}
                   </span>
                 </div>
+
+                <h3 className="text-xl font-bold text-[#F8FAFC]">
+                  {item.title}
+                </h3>
+                
+                <p className="text-sm font-semibold text-[#38BDF8] mt-1">
+                  {item.subtitle} — <span className="text-[#CBD5E1] font-normal">{item.institution}</span>
+                </p>
+
+                <p className="text-sm text-[#94A3B8] mt-4 leading-relaxed">
+                  {item.description}
+                </p>
               </div>
             </div>
           ))}
