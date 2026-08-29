@@ -168,12 +168,11 @@ export const handler = async (event) => {
     const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
     const systemPrompt = buildSystemPrompt(portfolioData);
 
-    // List of model candidates in priority order (ensures resilient failover across Gemini versions)
+    // Valid Google Gemini API model IDs
     const candidateModels = [
-      'gemini-2.5-flash',
-      'gemini-2.0-flash',
       'gemini-1.5-flash',
-      'gemini-1.5-flash-latest',
+      'gemini-2.0-flash',
+      'gemini-1.5-pro',
     ];
 
     let response = null;
