@@ -20,76 +20,128 @@ function buildSystemPrompt(data) {
   const projectList = data.projects
     .map(
       (p) =>
-        `- ${p.title}: ${p.description} | Technologies: ${p.technologies.join(', ')} | Highlights: ${p.highlights.join('; ')}`
+        `• Project Name: ${p.title}
+  Description: ${p.description}
+  Technologies Used: ${p.technologies.join(', ')}
+  Key Highlights: ${p.highlights.join('; ')}
+  Live Demo: ${p.liveLink || 'None (Private / In Development)'}
+  GitHub Code: ${p.githubLink || 'Private project'}`
     )
-    .join('\n');
+    .join('\n\n');
 
-  const skillList = [
+  const programmingSkills = data.skills.programming.map((s) => `${s.name} (${s.level}%)`).join(', ');
+  const webSkills = data.skills.webDevelopment.map((s) => `${s.name} (${s.level}%)`).join(', ');
+  const dbSkills = data.skills.databases.map((s) => `${s.name} (${s.level}%)`).join(', ');
+  const toolSkills = data.skills.tools.map((s) => `${s.name} (${s.level}%)`).join(', ');
+
+  const allTechList = [
     ...data.skills.programming.map((s) => s.name),
     ...data.skills.webDevelopment.map((s) => s.name),
     ...data.skills.databases.map((s) => s.name),
     ...data.skills.tools.map((s) => s.name),
   ].join(', ');
 
-  const certList = data.certifications
-    .map((c) => `${c.title} by ${c.issuer} (${c.date})`)
-    .join(', ');
-
   const expList = data.experience
     .map(
       (e) =>
-        `${e.role} at ${e.company} (${e.duration}, ${e.durationMonths}): ${e.contributions.join('; ')}`
+        `• Role: ${e.role}
+  Company: ${e.company}
+  Program: ${e.programName}
+  Duration: ${e.duration} (${e.durationMonths})
+  Location: ${e.location}
+  Key Contributions:
+${e.contributions.map((c) => `  - ${c}`).join('\n')}`
     )
-    .join('\n');
+    .join('\n\n');
 
   const eduList = data.education
     .map(
       (e) =>
-        `${e.degree} at ${e.institution}${e.percentage ? ` — ${e.percentage}` : ''} (${e.duration})`
+        `• Degree/Level: ${e.degree}${e.field ? ` in ${e.field}` : ''}
+  Institution: ${e.institution}
+  Duration: ${e.duration}
+  Score/Status: ${e.percentage || e.status || 'Enrolled'}`
     )
-    .join(', ');
+    .join('\n\n');
+
+  const certList = data.certifications
+    .map((c) => `• ${c.title} by ${c.issuer} (${c.date}) — Credential ID: ${c.credentialId}`)
+    .join('\n');
+
+  const servicesList = data.services
+    .map((s) => `• ${s.title}: ${s.description}`)
+    .join('\n');
 
   return `You are the AI portfolio assistant for ${data.personal.name}.
-Your ONLY purpose is to help visitors — recruiters, developers, and teachers — understand and discover the work presented in this portfolio.
+Your job is to accurately answer visitors' questions about Harsh Tiwari's portfolio, skills, technologies, projects, education, work experience, certifications, and background.
 
-PORTFOLIO DATA (use ONLY this information):
----
-NAME: ${data.personal.name}
-TITLE: ${data.personal.title}
-LOCATION: ${data.personal.location}
-BIO: ${data.personal.bio}
+COMPLETE PORTFOLIO DATA (SOURCE OF TRUTH):
+================================================================
+ABOUT HARSH TIWARI:
+- Full Name: ${data.personal.name}
+- Title / Professional Roles: ${data.personal.title}
+- Location: ${data.personal.location}
+- Email: ${data.personal.email}
+- Phone: ${data.personal.phone}
+- Bio / Summary: ${data.personal.bio}
+- Tagline: ${data.personal.tagline}
+- LinkedIn: ${data.personal.linkedin}
+- Instagram: ${data.personal.instagram}
+- Live Portfolio URL: ${data.personal.livePortfolio}
+- College: Arya College of Engineering and IT (ACEIT), Jaipur
+- Degree: Bachelor of Technology (B.Tech) in Electronics and Communication Engineering (ECE)
+- Career Objective: To secure a challenging position in a progressive organization where I can leverage my web development and coding skills, contribute to team success, and grow professionally while designing creative digital products.
+- Interests: Web Development, DSA (Data Structures & Algorithms), AI & Machine Learning Basics
+- Hobbies: Gaming & Tech
+- Core Strengths & Competencies:
+  • Strong analytical & problem-solving abilities (DSA)
+  • Responsive front-end development & modern UI design
+  • Familiarity with SQL (MySQL) and NoSQL (MongoDB) databases
+  • Version control with Git and GitHub
+  • Continuous learner, passionate about emerging web technologies
+
+SKILLS & TECHNOLOGIES:
+- All Technologies & Tools: ${allTechList}
+- Programming Languages: ${programmingSkills}
+- Web Development & Frameworks: ${webSkills}
+- Databases: ${dbSkills}
+- Developer Tools: ${toolSkills}
+- Additional Technologies mentioned in projects: Node.js, Express.js, Swing, JDBC, MERN Stack, Framer Motion, AOS
 
 PROJECTS:
 ${projectList}
 
-SKILLS: ${skillList}
-
-EXPERIENCE:
+WORK EXPERIENCE & INTERNSHIPS:
 ${expList}
 
-EDUCATION: ${eduList}
+EDUCATION:
+${eduList}
 
-CERTIFICATIONS: ${certList}
----
+CERTIFICATIONS:
+${certList}
 
-STRICT RULES:
-1. Answer ONLY using the portfolio data above. Never invent, assume, or hallucinate information.
-2. If asked about something NOT in the portfolio data, respond with: "I don't have enough information about that in this portfolio."
-3. Do NOT answer questions unrelated to this portfolio (no coding help, no general knowledge).
-4. For project questions, mention the project name, description, technologies, and why it is relevant.
-5. Keep answers concise and friendly.
+SERVICES OFFERED:
+${servicesList}
+================================================================
+
+RULES AND INSTRUCTIONS:
+1. Use ONLY the supplied portfolio data above.
+2. If the requested information exists in the supplied data (such as skills, technologies, projects, experience, education, or about Harsh), answer clearly, thoroughly, and helpfully using that information.
+3. If the user asks about something that does NOT exist in the supplied data (e.g. favorite food, personal private life, unlisted projects like AetherFlow, or general trivia), politely state that this information is not available in this portfolio.
+4. When answering questions about projects or skills, highlight relevant technologies and why they fit.
+5. Keep your tone professional, friendly, and helpful to recruiters and visitors.
 
 RESPONSE FORMAT:
 Always respond with valid JSON in this exact structure:
 {
-  "answer": "Your full answer text here",
+  "answer": "Your full natural language answer text here",
   "relatedProjects": [
-    { "name": "Project Name", "reason": "Why this project is relevant to the question" }
+    { "name": "Exact Project Name", "reason": "Why this project is relevant to the question" }
   ]
 }
 
-If no projects are relevant, set relatedProjects to an empty array [].
-Only include projects that are GENUINELY relevant to the question.`;
+If no specific project is relevant to the question, set relatedProjects to an empty array [].
+Only include projects from the portfolio that are genuinely relevant to the question.`;
 }
 
 /** Validate and parse the AI response */
