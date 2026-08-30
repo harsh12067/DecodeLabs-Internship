@@ -46,10 +46,10 @@ export default defineConfig(({ mode }) => {
     process.env.GEMINI_API_KEY = env.GEMINI_API_KEY;
   }
 
-  const isGitHubActions = process.env.GITHUB_ACTIONS === 'true';
+  const isNetlify = process.env.NETLIFY === 'true';
 
   return {
-    base: isGitHubActions ? '/DecodeLabs-Internship/' : '/',
+    base: isNetlify ? '/' : '/DecodeLabs-Internship/',
     plugins: [react(), devApiPlugin()],
     build: {
       rollupOptions: {
