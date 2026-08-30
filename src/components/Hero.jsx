@@ -79,8 +79,10 @@ export default function Hero() {
               Hire Me
             </a>
             <a 
-              href="/resume.jpg" 
-              download="Harsh_Tiwari_Resume.jpg"
+              href={`${import.meta.env.BASE_URL}resume.pdf`} 
+              download="Harsh_Tiwari_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn-secondary w-full sm:w-auto text-center py-3 sm:py-3.5 px-7"
             >
               Download Resume
