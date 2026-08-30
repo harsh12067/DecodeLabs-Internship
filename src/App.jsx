@@ -11,7 +11,6 @@ import Achievements from './components/Achievements';
 import Services from './components/Services';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import AskPortfolio from './components/AskPortfolio';
 
 // AOS Scrolling Animations
 import AOS from 'aos';
@@ -65,9 +64,6 @@ export default function App() {
 
       {/* Footer */}
       <Footer />
-
-      {/* Floating AI Assistant — rendered outside main for z-index stacking */}
-      <AskPortfolio />
     </div>
   );
 }
