@@ -95,7 +95,7 @@ ABOUT HARSH TIWARI:
 - Hobbies: Gaming & Tech
 - Core Strengths & Competencies:
   • Strong analytical & problem-solving abilities (DSA)
-  • Responsive front-end development & modern UI design
+  • Full-stack web development & modern UI design
   • Familiarity with SQL (MySQL) and NoSQL (MongoDB) databases
   • Version control with Git and GitHub
   • Continuous learner, passionate about emerging web technologies

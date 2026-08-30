@@ -12,11 +12,11 @@
 export const portfolioData = {
   personal: {
     name: 'Harsh Tiwari',
-    title: 'B.Tech Student | Front-End Developer | Programmer',
+    title: 'B.Tech Student | Full Stack Developer | Programmer',
     email: 'mt63767199@gmail.com',
     phone: '+91 63772 26860',
     location: 'Jaipur, Rajasthan, India',
-    bio: 'A passionate B.Tech student with a strong interest in web development, programming, and technology. I enjoy creating responsive websites and solving real-world problems through innovative software solutions.',
+    bio: 'A passionate B.Tech student and Full Stack Developer with a strong interest in web development, programming, and software engineering. I enjoy creating full-stack web applications and solving real-world problems through innovative software solutions.',
     tagline: 'Building Innovative Digital Solutions Through Code and Creativity.',
     linkedin: 'https://www.linkedin.com/in/harsh-tiwari-127192329',
     instagram: 'https://www.instagram.com/iharrxh',
@@ -209,7 +209,7 @@ export const portfolioData = {
     {
       title: 'Web Development',
       description:
-        'Building responsive, performant, and accessible websites using React, Tailwind CSS, and modern frontend technologies.',
+        'Building responsive, performant, and accessible full-stack web applications using React, Next.js, Node.js, Express, databases, and modern technologies.',
     },
     {
       title: 'UI/UX Design',

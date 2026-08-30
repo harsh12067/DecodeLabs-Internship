@@ -11,7 +11,7 @@ export default function About() {
 
   const strengths = [
     'Strong analytical & problem-solving abilities (DSA)',
-    'Responsive front-end development & modern UI design',
+    'Full-stack web development & modern responsive UI design',
     'Familiarity with SQL, NoSQL databases and Git version control',
     'Continuous learner, passionate about emerging web technologies'
   ];
@@ -36,7 +36,7 @@ export default function About() {
           {/* Left Text */}
           <div className="lg:col-span-7 space-y-6" data-aos="fade-right">
             <h3 className="text-2xl font-bold text-[#F8FAFC]">
-              Passionate <span className="text-[#38BDF8]">B.Tech Student</span> & <span className="text-[#38BDF8]">Front-End Developer</span>
+              Passionate <span className="text-[#38BDF8]">B.Tech Student</span> & <span className="text-[#38BDF8]">Full Stack Developer</span>
             </h3>
             
             <p className="text-[#94A3B8] leading-relaxed">

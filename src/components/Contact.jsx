@@ -80,7 +80,7 @@ export default function Contact() {
             </h3>
             
             <p className="text-[#94A3B8] leading-relaxed text-sm">
-              I am open to discuss front-end development projects, full-stack website setups, software tools, or simple chats about web architectures. Drop a message or find me on socials!
+              I am open to discuss full-stack development projects, web applications, backend APIs, software tools, or tech collaborations. Drop a message or find me on socials!
             </p>
 
             <div className="space-y-6">

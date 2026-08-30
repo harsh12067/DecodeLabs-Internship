@@ -40,7 +40,7 @@ function Typewriter({ words, typingSpeed = 100, deletingSpeed = 50, delayBetween
 }
 
 export default function Hero() {
-  const words = ['B.Tech Student', 'Front-End Developer', 'Programmer'];
+  const words = ['Full Stack Developer', 'B.Tech Student', 'Software Developer'];
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-x-clip pt-24 sm:pt-28 pb-12">
