@@ -43,51 +43,52 @@ export default function Hero() {
   const words = ['B.Tech Student', 'Front-End Developer', 'Programmer'];
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-x-clip pt-24 sm:pt-28 pb-12">
       {/* Dynamic Ambient Background Blue Glow Blobs */}
-      <div className="absolute top-20 left-10 w-80 h-80 rounded-full bg-blue-600/10 blob animate-spin-slow pointer-events-none" />
-      <div className="absolute bottom-20 right-10 w-96 h-96 rounded-full bg-sky-500/10 blob animate-pulse-slow pointer-events-none" />
+      <div className="absolute top-16 left-1/2 -translate-x-1/2 md:left-10 md:translate-x-0 w-72 h-72 sm:w-80 sm:h-80 rounded-full bg-blue-600/10 blob animate-spin-slow pointer-events-none" />
+      <div className="absolute bottom-16 right-1/2 translate-x-1/2 md:right-10 md:translate-x-0 w-80 h-80 sm:w-96 sm:h-96 rounded-full bg-sky-500/10 blob animate-pulse-slow pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10 grid grid-cols-1 md:grid-cols-12 gap-8 items-center py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10 grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-center">
+        
         {/* Left Text details */}
-        <div className="md:col-span-7 flex flex-col justify-center text-center md:text-left space-y-6 order-2 md:order-1" data-aos="fade-right">
-          <span className="text-sm font-semibold tracking-wider uppercase text-[#38BDF8] inline-flex items-center justify-center md:justify-start gap-2">
+        <div className="md:col-span-7 flex flex-col items-center md:items-start text-center md:text-left space-y-5 sm:space-y-6 order-2 md:order-1" data-aos="fade-up">
+          <span className="text-xs sm:text-sm font-semibold tracking-wider uppercase text-[#38BDF8] inline-flex items-center gap-2 bg-[#111827] border border-sky-500/20 px-3.5 py-1.5 rounded-full shadow-sm">
             <span className="w-2 h-2 rounded-full bg-[#38BDF8] animate-ping" />
             Welcome to my digital space
           </span>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#F8FAFC] leading-tight tracking-tight">
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-[#F8FAFC] leading-tight tracking-tight">
             Hi, I'm <span className="bg-gradient-to-r from-[#38BDF8] to-[#2563EB] bg-clip-text text-transparent">Harsh Tiwari</span>
           </h1>
           
-          <h2 className="text-xl sm:text-2xl font-medium text-[#CBD5E1]">
+          <h2 className="text-lg sm:text-2xl font-medium text-[#CBD5E1]">
             I am a <Typewriter words={words} />
           </h2>
 
-          <p className="text-base sm:text-lg text-[#94A3B8] max-w-xl">
+          <p className="text-sm sm:text-base lg:text-lg text-[#94A3B8] max-w-xl leading-relaxed">
             "Building Innovative Digital Solutions Through Code and Creativity."
             <br />
-            <span className="text-sm mt-2 block text-[#64748B]">
+            <span className="text-xs sm:text-sm mt-2 block text-[#64748B] leading-normal">
               I am a passionate B.Tech student with a strong interest in web development, programming, and technology. I enjoy creating responsive websites and solving real-world problems through innovative software solutions.
             </span>
           </p>
 
           {/* Action buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 pt-4">
-            <a href="#contact" className="btn-primary w-full sm:w-auto text-center">
+          <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-3 sm:gap-4 pt-2 w-full sm:w-auto">
+            <a href="#contact" className="btn-primary w-full sm:w-auto text-center py-3 sm:py-3.5 px-7">
               Hire Me
             </a>
             <a 
               href="/resume.jpg" 
               download="Harsh_Tiwari_Resume.jpg"
-              className="btn-secondary w-full sm:w-auto text-center"
+              className="btn-secondary w-full sm:w-auto text-center py-3 sm:py-3.5 px-7"
             >
               Download Resume
             </a>
           </div>
 
           {/* Social Channels */}
-          <div className="flex items-center justify-center md:justify-start space-x-4 pt-6">
+          <div className="flex items-center justify-center md:justify-start space-x-4 pt-4">
             <a 
               href="https://www.linkedin.com/in/harsh-tiwari-127192329?utm_source=share_via&utm_content=profile&utm_medium=member_android" 
               target="_blank" 
@@ -117,8 +118,8 @@ export default function Hero() {
         </div>
 
         {/* Right profile image */}
-        <div className="md:col-span-5 flex justify-center order-1 md:order-2" data-aos="fade-left">
-          <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96">
+        <div className="md:col-span-5 flex justify-center items-center order-1 md:order-2 w-full py-4" data-aos="fade-up">
+          <div className="relative w-56 h-56 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 mx-auto">
             {/* Subtle Blue Glow and Rotating Rings */}
             <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#2563EB] to-[#38BDF8] animate-spin-slow opacity-35 blur-lg scale-105" />
             <div className="absolute inset-2 rounded-full border-2 border-dashed border-sky-400/40 animate-spin-slow" />
@@ -131,15 +132,17 @@ export default function Hero() {
                 className="w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-500 ease-out" 
               />
             </div>
-            {/* Floating micro badges with subtle glow */}
-            <div className="absolute top-8 right-0 p-3 rounded-2xl glass-card text-center animate-float shadow-lg border border-sky-500/30">
-              <span className="text-2xl">💻</span>
+
+            {/* Floating micro badges with safe responsive placement */}
+            <div className="absolute top-2 right-0 sm:top-6 sm:-right-2 p-2 sm:p-3 rounded-2xl glass-card text-center animate-float shadow-lg border border-sky-500/30">
+              <span className="text-xl sm:text-2xl">💻</span>
             </div>
-            <div className="absolute bottom-8 left-0 p-3 rounded-2xl glass-card text-center animate-float shadow-lg border border-sky-500/30" style={{ animationDelay: '1.5s' }}>
-              <span className="text-2xl">🚀</span>
+            <div className="absolute bottom-2 left-0 sm:bottom-6 sm:-left-2 p-2 sm:p-3 rounded-2xl glass-card text-center animate-float shadow-lg border border-sky-500/30" style={{ animationDelay: '1.5s' }}>
+              <span className="text-xl sm:text-2xl">🚀</span>
             </div>
           </div>
         </div>
+
       </div>
     </section>
   );
