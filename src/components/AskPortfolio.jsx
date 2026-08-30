@@ -111,7 +111,13 @@ export default function AskPortfolio() {
     const timeoutId = setTimeout(() => controller.abort(), 15000);
 
     try {
-      const res = await fetch('/.netlify/functions/ask-portfolio', {
+      const endpoint =
+        typeof window !== 'undefined' &&
+        (window.location.hostname.includes('netlify.app') || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+          ? '/.netlify/functions/ask-portfolio'
+          : 'https://portfolioowebb.netlify.app/.netlify/functions/ask-portfolio';
+
+      const res = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ question: trimmed }),

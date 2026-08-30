@@ -171,11 +171,28 @@ function parseAIResponse(rawText) {
   }
 }
 
+const CORS_HEADERS = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'Content-Type',
+  'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  'Content-Type': 'application/json',
+};
+
 export const handler = async (event) => {
+  // Handle CORS preflight
+  if (event.httpMethod === 'OPTIONS') {
+    return {
+      statusCode: 200,
+      headers: CORS_HEADERS,
+      body: '',
+    };
+  }
+
   // Only allow POST
   if (event.httpMethod !== 'POST') {
     return {
       statusCode: 405,
+      headers: CORS_HEADERS,
       body: JSON.stringify({ error: 'Method not allowed' }),
     };
   }
@@ -188,6 +205,7 @@ export const handler = async (event) => {
   } catch {
     return {
       statusCode: 400,
+      headers: CORS_HEADERS,
       body: JSON.stringify({ error: 'Invalid request body' }),
     };
   }
@@ -196,6 +214,7 @@ export const handler = async (event) => {
   if (!question || question.length === 0) {
     return {
       statusCode: 400,
+      headers: CORS_HEADERS,
       body: JSON.stringify({ error: 'Question is required' }),
     };
   }
@@ -203,6 +222,7 @@ export const handler = async (event) => {
   if (question.length > 500) {
     return {
       statusCode: 400,
+      headers: CORS_HEADERS,
       body: JSON.stringify({ error: 'Question is too long (max 500 characters)' }),
     };
   }
@@ -213,6 +233,7 @@ export const handler = async (event) => {
     console.error('GEMINI_API_KEY is not configured');
     return {
       statusCode: 500,
+      headers: CORS_HEADERS,
       body: JSON.stringify({ error: 'GEMINI_API_KEY is not configured. Please add it to your Netlify Environment Variables.' }),
     };
   }
@@ -240,7 +261,7 @@ export const handler = async (event) => {
       // Malformed or unexpected response — safe fallback
       return {
         statusCode: 200,
-        headers: { 'Content-Type': 'application/json' },
+        headers: CORS_HEADERS,
         body: JSON.stringify({
           answer: "I don't have enough information about that in this portfolio.",
           relatedProjects: [],
@@ -251,7 +272,7 @@ export const handler = async (event) => {
 
     return {
       statusCode: 200,
-      headers: { 'Content-Type': 'application/json' },
+      headers: CORS_HEADERS,
       body: JSON.stringify(parsed),
     };
   } catch (error) {
@@ -261,6 +282,7 @@ export const handler = async (event) => {
     if (error.message?.includes('timeout') || error.code === 'ETIMEDOUT') {
       return {
         statusCode: 504,
+        headers: CORS_HEADERS,
         body: JSON.stringify({ error: 'The request timed out. Please try again.' }),
       };
     }
@@ -279,7 +301,7 @@ export const handler = async (event) => {
 
     return {
       statusCode: 500,
-      headers: { 'Content-Type': 'application/json' },
+      headers: CORS_HEADERS,
       body: JSON.stringify({ error: userFriendlyError }),
     };
   }
