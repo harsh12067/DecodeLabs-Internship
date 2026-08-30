@@ -46,8 +46,10 @@ export default defineConfig(({ mode }) => {
     process.env.GEMINI_API_KEY = env.GEMINI_API_KEY;
   }
 
+  const isGitHubActions = process.env.GITHUB_ACTIONS === 'true';
+
   return {
-    base: './',
+    base: isGitHubActions ? '/DecodeLabs-Internship/' : '/',
     plugins: [react(), devApiPlugin()],
     build: {
       rollupOptions: {
